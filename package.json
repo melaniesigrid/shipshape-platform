@@ -1,0 +1,25 @@
+{
+  "name": "shipshape",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shipshape — kanban boards and readiness rubrics across a portfolio of projects",
+  "packageManager": "pnpm@11.4.0",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "db:push": "pnpm --filter @shipshape/db push",
+    "db:seed": "pnpm --filter @shipshape/db seed",
+    "db:studio": "pnpm --filter @shipshape/db studio"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.5",
+    "typescript": "^5.9.2",
+    "@types/node": "^24.3.0"
+  },
+  "engines": {
+    "node": ">=22.6.0"
+  }
+}
