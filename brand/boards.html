@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="en" data-shipshape-theme="harbour-light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northbound Portfolio</title>
+<meta name="description" content="Every Northbound project, its readiness rubric, and the board of work that would clear it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Hanken+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* ================================================================== */
+/* Theme contract — GENERATED from packages/ui/src/themes.ts.          */
+/* ================================================================== */
+
+[data-shipshape-theme="chart-rule"] {
+  color-scheme: light;
+  --ground: #f6f4ef;
+  --surface: #fffdf9;
+  --sunken: #eceae3;
+  --ink: #14211e;
+  --ink-soft: #47544f;
+  --ink-faint: #626c68;
+  --line: #d5d2ca;
+  --line-strong: #bbb9b2;
+  --accent: #2b6559;
+  --on-accent: #fffdf9;
+  --accent-soft: rgba(43, 101, 89, 0.14);
+  --accent-hover: #26594e;
+  --color-blocked: #a83f2a;
+  --color-blocked-soft: rgba(168, 63, 42, 0.14);
+  --color-at-risk: #7d5410;
+  --color-at-risk-soft: rgba(125, 84, 16, 0.14);
+  --color-on-track: #2b627f;
+  --color-on-track-soft: rgba(43, 98, 127, 0.14);
+  --color-ready: #2a6f47;
+  --color-ready-soft: rgba(42, 111, 71, 0.14);
+  --color-waived: #5f5280;
+  --color-waived-soft: rgba(95, 82, 128, 0.14);
+  --elev-raised: 0 0 0 1px rgba(213, 210, 202, 1), 0 1px 2px rgba(20, 33, 30, 0.06), 0 8px 24px rgba(20, 33, 30, 0.06);
+  --elev-raised-sm: 0 0 0 1px rgba(213, 210, 202, 1);
+  --elev-raised-lg: 0 0 0 1px rgba(213, 210, 202, 1), 0 2px 4px rgba(20, 33, 30, 0.06), 0 16px 40px rgba(20, 33, 30, 0.06);
+  --elev-inset: inset 0 1px 2px rgba(20, 33, 30, 0.06);
+  --elev-flush: none;
+  --radius-card: 6px;
+  --radius-control: 6px;
+  --radius-pill: 999px;
+  --elevation-style: flat;
+  --color-scheme: light;
+}
+
+[data-shipshape-theme="harbour-light"] {
+  color-scheme: light;
+  --ground: #e3e9f0;
+  --surface: #e3e9f0;
+  --sunken: #d7dee7;
+  --ink: #16202b;
+  --ink-soft: #3f4c5b;
+  --ink-faint: #556374;
+  --line: #c5cfdb;
+  --line-strong: #adb6c1;
+  --accent: #356484;
+  --on-accent: #ffffff;
+  --accent-soft: rgba(53, 100, 132, 0.14);
+  --accent-hover: #2f5874;
+  --color-blocked: #9e3b25;
+  --color-blocked-soft: rgba(158, 59, 37, 0.14);
+  --color-at-risk: #7a530c;
+  --color-at-risk-soft: rgba(122, 83, 12, 0.14);
+  --color-on-track: #2b5f7d;
+  --color-on-track-soft: rgba(43, 95, 125, 0.14);
+  --color-ready: #286744;
+  --color-ready-soft: rgba(40, 103, 68, 0.14);
+  --color-waived: #584a7c;
+  --color-waived-soft: rgba(88, 74, 124, 0.14);
+  --elev-raised: 6px 6px 14px #bcc1c7, -6px -6px 14px #f8fafb;
+  --elev-raised-sm: 3px 3px 7px #bcc1c7, -3px -3px 7px #f8fafb;
+  --elev-raised-lg: 10px 10px 24px #bcc1c7, -10px -10px 24px #f8fafb;
+  --elev-inset: inset 4px 4px 9px #bcc1c7, inset -4px -4px 9px #f8fafb;
+  --elev-flush: none;
+  --radius-card: 16px;
+  --radius-control: 12px;
+  --radius-pill: 999px;
+  --elevation-style: soft;
+  --color-scheme: light;
+}
+
+[data-shipshape-theme="harbour-dark"] {
+  color-scheme: dark;
+  --ground: #232b35;
+  --surface: #232b35;
+  --sunken: #1c232b;
+  --ink: #e8edf3;
+  --ink-soft: #b7c2cf;
+  --ink-faint: #95a3b3;
+  --line: #333d4a;
+  --line-strong: #4b5460;
+  --accent: #89b1d4;
+  --on-accent: #141d27;
+  --accent-soft: rgba(137, 177, 212, 0.14);
+  --accent-hover: #97bad9;
+  --color-blocked: #e98a71;
+  --color-blocked-soft: rgba(233, 138, 113, 0.14);
+  --color-at-risk: #d8a64c;
+  --color-at-risk-soft: rgba(216, 166, 76, 0.14);
+  --color-on-track: #82b2d6;
+  --color-on-track-soft: rgba(130, 178, 214, 0.14);
+  --color-ready: #79c497;
+  --color-ready-soft: rgba(121, 196, 151, 0.14);
+  --color-waived: #b0a2d8;
+  --color-waived-soft: rgba(176, 162, 216, 0.14);
+  --elev-raised: 6px 6px 14px #14191f, -6px -6px 14px #394049;
+  --elev-raised-sm: 3px 3px 7px #14191f, -3px -3px 7px #394049;
+  --elev-raised-lg: 10px 10px 24px #14191f, -10px -10px 24px #394049;
+  --elev-inset: inset 4px 4px 9px #14191f, inset -4px -4px 9px #394049;
+  --elev-flush: none;
+  --radius-card: 16px;
+  --radius-control: 12px;
+  --radius-pill: 999px;
+  --elevation-style: soft;
+  --color-scheme: dark;
+}
+
+[data-shipshape-theme="sage-light"] {
+  color-scheme: light;
+  --ground: #e7ebe4;
+  --surface: #e7ebe4;
+  --sunken: #dbe0d7;
+  --ink: #1b241d;
+  --ink-soft: #414d43;
+  --ink-faint: #586457;
+  --line: #c9d1c5;
+  --line-strong: #b1b8ad;
+  --accent: #3f6249;
+  --on-accent: #ffffff;
+  --accent-soft: rgba(63, 98, 73, 0.14);
+  --accent-hover: #375640;
+  --color-blocked: #9f3b26;
+  --color-blocked-soft: rgba(159, 59, 38, 0.14);
+  --color-at-risk: #78520c;
+  --color-at-risk-soft: rgba(120, 82, 12, 0.14);
+  --color-on-track: #2b5f7d;
+  --color-on-track-soft: rgba(43, 95, 125, 0.14);
+  --color-ready: #296845;
+  --color-ready-soft: rgba(41, 104, 69, 0.14);
+  --color-waived: #584a7c;
+  --color-waived-soft: rgba(88, 74, 124, 0.14);
+  --elev-raised: 6px 6px 14px #c0c3bd, -6px -6px 14px #f9faf8;
+  --elev-raised-sm: 3px 3px 7px #c0c3bd, -3px -3px 7px #f9faf8;
+  --elev-raised-lg: 10px 10px 24px #c0c3bd, -10px -10px 24px #f9faf8;
+  --elev-inset: inset 4px 4px 9px #c0c3bd, inset -4px -4px 9px #f9faf8;
+  --elev-flush: none;
+  --radius-card: 16px;
+  --radius-control: 12px;
+  --radius-pill: 999px;
+  --elevation-style: soft;
+  --color-scheme: light;
+}
+
+[data-shipshape-theme="sage-dark"] {
+  color-scheme: dark;
+  --ground: #242a25;
+  --surface: #242a25;
+  --sunken: #1d221e;
+  --ink: #e9eee7;
+  --ink-soft: #b8c2b8;
+  --ink-faint: #96a296;
+  --line: #343b35;
+  --line-strong: #4c534d;
+  --accent: #93b89b;
+  --on-accent: #161f19;
+  --accent-soft: rgba(147, 184, 155, 0.14);
+  --accent-hover: #a0c1a7;
+  --color-blocked: #e98a71;
+  --color-blocked-soft: rgba(233, 138, 113, 0.14);
+  --color-at-risk: #d8a64c;
+  --color-at-risk-soft: rgba(216, 166, 76, 0.14);
+  --color-on-track: #82b2d6;
+  --color-on-track-soft: rgba(130, 178, 214, 0.14);
+  --color-ready: #7cc79b;
+  --color-ready-soft: rgba(124, 199, 155, 0.14);
+  --color-waived: #b0a2d8;
+  --color-waived-soft: rgba(176, 162, 216, 0.14);
+  --elev-raised: 6px 6px 14px #151815, -6px -6px 14px #3a3f3b;
+  --elev-raised-sm: 3px 3px 7px #151815, -3px -3px 7px #3a3f3b;
+  --elev-raised-lg: 10px 10px 24px #151815, -10px -10px 24px #3a3f3b;
+  --elev-inset: inset 4px 4px 9px #151815, inset -4px -4px 9px #3a3f3b;
+  --elev-flush: none;
+  --radius-card: 16px;
+  --radius-control: 12px;
+  --radius-pill: 999px;
+  --elevation-style: soft;
+  --color-scheme: dark;
+}
+
+[data-shipshape-theme="dusk-light"] {
+  color-scheme: light;
+  --ground: #ebe8ef;
+  --surface: #ebe8ef;
+  --sunken: #e0dce6;
+  --ink: #211b28;
+  --ink-soft: #4a4356;
+  --ink-faint: #5f576c;
+  --line: #d0cad9;
+  --line-strong: #b7b2bf;
+  --accent: #544878;
+  --on-accent: #ffffff;
+  --accent-soft: rgba(84, 72, 120, 0.14);
+  --accent-hover: #4a3f6a;
+  --color-blocked: #9f3b26;
+  --color-blocked-soft: rgba(159, 59, 38, 0.14);
+  --color-at-risk: #78520c;
+  --color-at-risk-soft: rgba(120, 82, 12, 0.14);
+  --color-on-track: #2b5f7d;
+  --color-on-track-soft: rgba(43, 95, 125, 0.14);
+  --color-ready: #296845;
+  --color-ready-soft: rgba(41, 104, 69, 0.14);
+  --color-waived: #584a7c;
+  --color-waived-soft: rgba(88, 74, 124, 0.14);
+  --elev-raised: 6px 6px 14px #c3c1c6, -6px -6px 14px #faf9fb;
+  --elev-raised-sm: 3px 3px 7px #c3c1c6, -3px -3px 7px #faf9fb;
+  --elev-raised-lg: 10px 10px 24px #c3c1c6, -10px -10px 24px #faf9fb;
+  --elev-inset: inset 4px 4px 9px #c3c1c6, inset -4px -4px 9px #faf9fb;
+  --elev-flush: none;
+  --radius-card: 16px;
+  --radius-control: 12px;
+  --radius-pill: 999px;
+  --elevation-style: soft;
+  --color-scheme: light;
+}
+
+[data-shipshape-theme="dusk-dark"] {
+  color-scheme: dark;
+  --ground: #2a2632;
+  --surface: #2a2632;
+  --sunken: #221f29;
+  --ink: #ede9f2;
+  --ink-soft: #beb7c9;
+  --ink-faint: #9d94aa;
+  --line: #3b3546;
+  --line-strong: #534d5c;
+  --accent: #af9fd8;
+  --on-accent: #1c1724;
+  --accent-soft: rgba(175, 159, 216, 0.14);
+  --accent-hover: #b9abdd;
+  --color-blocked: #e98a71;
+  --color-blocked-soft: rgba(233, 138, 113, 0.14);
+  --color-at-risk: #d8a64c;
+  --color-at-risk-soft: rgba(216, 166, 76, 0.14);
+  --color-on-track: #82b2d6;
+  --color-on-track-soft: rgba(130, 178, 214, 0.14);
+  --color-ready: #7cc79b;
+  --color-ready-soft: rgba(124, 199, 155, 0.14);
+  --color-waived: #c4b8e4;
+  --color-waived-soft: rgba(196, 184, 228, 0.14);
+  --elev-raised: 6px 6px 14px #18161d, -6px -6px 14px #3f3c47;
+  --elev-raised-sm: 3px 3px 7px #18161d, -3px -3px 7px #3f3c47;
+  --elev-raised-lg: 10px 10px 24px #18161d, -10px -10px 24px #3f3c47;
+  --elev-inset: inset 4px 4px 9px #18161d, inset -4px -4px 9px #3f3c47;
+  --elev-flush: none;
+  --radius-card: 16px;
+  --radius-control: 12px;
+  --radius-pill: 999px;
+  --elevation-style: soft;
+  --color-scheme: dark;
+}
+
+/* ================================================================== */
+/* Application                                                         */
+/* ================================================================== */
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+h1,h2,h3,h4 { font-family: "Fraunces", ui-serif, Georgia, serif; font-weight: 550; margin: 0; letter-spacing: -0.015em; }
+p { margin: 0; }
+a { color: var(--accent); }
+code { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.86em; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 5px; }
+
+.app { min-height: 100vh; background: var(--ground); transition: background-color 240ms ease; }
+.shell { display: grid; grid-template-columns: 268px minmax(0, 1fr); gap: 26px; max-width: 1440px; margin: 0 auto; padding: 24px; }
+@media (max-width: 900px) { .shell { grid-template-columns: 1fr; } }
+
+/* --- Rail ---------------------------------------------------------- */
+
+.rail { display: flex; flex-direction: column; gap: 14px; align-self: start; position: sticky; top: 24px; }
+@media (max-width: 900px) { .rail { position: static; } }
+
+.brand { padding: 2px 4px 0; }
+.brand h1 { font-size: 23px; letter-spacing: -0.03em; }
+.brand p { font-size: 12.5px; color: var(--ink-faint); margin-top: 1px; }
+
+.rail-list { display: flex; flex-direction: column; gap: 7px; }
+
+.rail-item {
+  display: block; width: 100%; text-align: left; border: 0; cursor: pointer;
+  font: inherit; color: var(--ink);
+  background: var(--surface); border-radius: var(--radius-control);
+  box-shadow: var(--elev-raised-sm); padding: 11px 13px;
+  transition: box-shadow 160ms ease, transform 160ms ease;
+}
+.rail-item:hover { transform: translateY(-1px); box-shadow: var(--elev-raised); }
+.rail-item[aria-current="true"] { box-shadow: var(--elev-inset); transform: none; }
+
+.rail-top { display: flex; align-items: center; gap: 8px; }
+.dot { width: 9px; height: 9px; border-radius: 999px; flex: none; }
+.rail-name { font-size: 13.5px; font-weight: 500; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rail-score { font-family: "JetBrains Mono", monospace; font-size: 11.5px; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+.rail-bar { height: 4px; border-radius: 999px; background: var(--sunken); box-shadow: var(--elev-inset); overflow: hidden; margin-top: 8px; }
+.rail-bar > span { display: block; height: 100%; border-radius: 999px; }
+
+/* --- Switcher ------------------------------------------------------ */
+
+.switcher { display: flex; flex-direction: column; gap: 8px; padding: 13px; }
+.switch-label { font-family: "JetBrains Mono", monospace; font-size: 9.5px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-faint); }
+.switch-row { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 11px; border: 0; cursor: pointer; font: inherit; font-size: 12.5px;
+  color: var(--ink-soft); background: var(--surface);
+  border-radius: var(--radius-pill); box-shadow: var(--elev-raised-sm);
+  transition: box-shadow 160ms ease, color 160ms ease;
+}
+.chip:hover { color: var(--ink); }
+/* Pressed reads as pushed in. On a moulded surface a filled pill would be
+   borrowing a flat idiom. */
+.chip[aria-pressed="true"] { box-shadow: var(--elev-inset); color: var(--accent); font-weight: 500; }
+.chip[disabled] { opacity: 0.38; cursor: not-allowed; }
+.chip-dot { width: 8px; height: 8px; border-radius: 999px; }
+
+.mode-note { font-size: 11.5px; color: var(--ink-faint); }
+
+/* --- Panels -------------------------------------------------------- */
+
+.panel { background: var(--surface); border-radius: var(--radius-card); box-shadow: var(--elev-raised); }
+.pad { padding: 20px; }
+
+.main { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+
+.head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.head h2 { font-size: 25px; display: flex; align-items: center; gap: 10px; }
+.head .summary { color: var(--ink-soft); font-size: 14px; margin-top: 5px; max-width: 62ch; }
+
+.meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 10px; }
+.tagline { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--ink-faint); }
+
+.scoreblock { text-align: right; flex: none; }
+.scoreblock .n { font-family: "Fraunces", serif; font-size: 40px; font-weight: 550; line-height: 1; font-variant-numeric: tabular-nums; }
+.scoreblock .rubric { font-size: 11.5px; color: var(--ink-faint); margin-top: 3px; }
+
+.bar { height: 8px; border-radius: 999px; background: var(--sunken); box-shadow: var(--elev-inset); overflow: hidden; }
+.bar > span { display: block; height: 100%; border-radius: 999px; transition: width 500ms ease; }
+
+.pill { display: inline-flex; align-items: center; gap: 6px; border-radius: var(--radius-pill); padding: 4px 11px; font-size: 12px; font-weight: 500; }
+.pill .n { font-family: "JetBrains Mono", monospace; font-size: 11px; opacity: 0.85; }
+
+.pill-blocked, .fillwrap-blocked { background: var(--color-blocked-soft); color: var(--color-blocked); }
+.pill-at-risk { background: var(--color-at-risk-soft); color: var(--color-at-risk); }
+.pill-on-track { background: var(--color-on-track-soft); color: var(--color-on-track); }
+.pill-ready { background: var(--color-ready-soft); color: var(--color-ready); }
+.pill-neutral { background: var(--sunken); color: var(--ink-faint); box-shadow: var(--elev-inset); }
+
+.fill-blocked { background: var(--color-blocked); }
+.fill-at-risk { background: var(--color-at-risk); }
+.fill-on-track { background: var(--color-on-track); }
+.fill-ready { background: var(--color-ready); }
+
+/* --- Context ------------------------------------------------------- */
+
+.context { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.context section { padding: 18px 20px; }
+.context h3 { font-size: 14px; margin-bottom: 7px; }
+.context p { font-size: 13.5px; line-height: 1.6; color: var(--ink-soft); }
+.context p + p { margin-top: 9px; }
+.context code { background: var(--sunken); padding: 1px 5px; border-radius: 4px; box-shadow: var(--elev-inset); }
+
+.warn {
+  padding: 13px 16px; border-radius: var(--radius-card);
+  background: var(--color-at-risk-soft); color: var(--color-at-risk);
+  font-size: 13.5px; line-height: 1.5;
+}
+
+details.context-toggle > summary {
+  cursor: pointer; list-style: none; font-size: 12px;
+  font-family: "JetBrains Mono", monospace; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-faint); padding: 4px 0;
+}
+details.context-toggle > summary::-webkit-details-marker { display: none; }
+details.context-toggle > summary:hover { color: var(--ink); }
+details.context-toggle[open] > summary { margin-bottom: 12px; }
+
+/* --- Board --------------------------------------------------------- */
+
+.board { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; align-items: start; }
+@media (max-width: 1180px) { .board { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .board { grid-template-columns: 1fr; } }
+
+.column { background: var(--sunken); border-radius: var(--radius-card); box-shadow: var(--elev-inset); padding: 6px; transition: box-shadow 160ms ease; }
+.column.over { box-shadow: var(--elev-inset), 0 0 0 1.5px var(--color-at-risk); }
+.column.dragover { box-shadow: var(--elev-inset), 0 0 0 2px var(--accent); }
+
+.col-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; padding: 9px 11px 7px; }
+.col-head h4 { font-size: 13px; }
+.count { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--ink-faint); }
+.count.over { color: var(--color-at-risk); font-weight: 500; }
+.col-warn { margin: 0 7px 7px; padding: 6px 9px; font-size: 11.5px; line-height: 1.4; color: var(--color-at-risk); background: var(--color-at-risk-soft); border-radius: var(--radius-control); }
+.col-body { display: flex; flex-direction: column; gap: 9px; padding: 3px 6px 7px; min-height: 52px; }
+.col-empty { padding: 16px 8px; text-align: center; font-size: 12px; color: var(--ink-faint); }
+
+.card {
+  background: var(--surface); border-radius: var(--radius-control);
+  box-shadow: var(--elev-raised-sm); padding: 11px; cursor: grab;
+  transition: box-shadow 170ms ease, transform 170ms ease, opacity 170ms ease;
+}
+.card:hover { box-shadow: var(--elev-raised); transform: translateY(-1px); }
+.card.dragging { opacity: 0.4; }
+.card.done .card-title { color: var(--ink-faint); }
+.card-title { font-size: 13px; font-weight: 500; line-height: 1.4; }
+.card-note { font-size: 11.5px; line-height: 1.45; color: var(--ink-faint); margin-top: 5px; }
+.tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.tag { font-size: 10px; padding: 2px 7px; border-radius: 999px; background: var(--sunken); color: var(--ink-faint); box-shadow: var(--elev-inset); }
+.tag-criterion { font-family: "JetBrains Mono", monospace; background: var(--accent-soft); color: var(--accent); box-shadow: none; }
+.tag-required { background: var(--color-blocked-soft); color: var(--color-blocked); box-shadow: none; }
+
+.move { display: flex; gap: 3px; margin-top: 7px; opacity: 0; transition: opacity 150ms ease; }
+.card:hover .move, .card:focus-within .move { opacity: 1; }
+.move button { border: 0; background: transparent; cursor: pointer; font: inherit; font-size: 12px; color: var(--ink-faint); padding: 2px 7px; border-radius: 6px; }
+.move button:hover:not(:disabled) { background: var(--sunken); color: var(--ink); }
+.move button:disabled { opacity: 0.25; cursor: not-allowed; }
+
+/* --- Portfolio ----------------------------------------------------- */
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(268px, 1fr)); gap: 15px; }
+.pcard { padding: 17px; cursor: pointer; border: 0; text-align: left; font: inherit; color: var(--ink); background: var(--surface); border-radius: var(--radius-card); box-shadow: var(--elev-raised); transition: transform 170ms ease, box-shadow 170ms ease; width: 100%; }
+.pcard:hover { transform: translateY(-2px); box-shadow: var(--elev-raised-lg); }
+.pcard h3 { font-size: 16px; display: flex; align-items: center; gap: 8px; }
+.pcard .summary { font-size: 12.5px; color: var(--ink-faint); margin-top: 5px; min-height: 34px; line-height: 1.45; }
+.pcard .foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 13px; }
+
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); gap: 13px; }
+.stat { padding: 15px 17px; }
+.stat .k { font-family: "JetBrains Mono", monospace; font-size: 9.5px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-faint); }
+.stat .v { font-family: "Fraunces", serif; font-size: 28px; font-weight: 550; line-height: 1.1; margin-top: 3px; font-variant-numeric: tabular-nums; }
+
+footer { grid-column: 1 / -1; font-size: 12px; color: var(--ink-faint); line-height: 1.6; padding: 8px 4px 0; max-width: 84ch; }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; } }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="shell">
+
+    <aside class="rail">
+      <div class="brand">
+        <h1>Shipshape</h1>
+        <p>Northbound portfolio</p>
+      </div>
+
+      <div class="rail-list">
+        <button type="button" class="rail-item" data-view="portfolio" aria-current="true">
+          <span class="rail-top"><span class="rail-name">All projects</span>
+          <span class="rail-score">8</span></span>
+        </button>
+      </div>
+
+      <div class="rail-list" id="rail"></div>
+
+      <div class="panel switcher">
+        <span class="switch-label">Theme</span>
+        <div class="switch-row"><button type="button" class="chip" data-family="chart-rule" title="Warm chart paper and hairline rules. Reads like a survey document."><span class="chip-dot" style="background:#2b6559"></span>Chart &amp; Rule</button><button type="button" class="chip" data-family="harbour" title="Cool blue-grey after dark. The same moulding, lit from above."><span class="chip-dot" style="background:#89b1d4"></span>Harbour</button><button type="button" class="chip" data-family="sage" title="Muted green-grey after dark. Moss under a low lamp."><span class="chip-dot" style="background:#93b89b"></span>Sage</button><button type="button" class="chip" data-family="dusk" title="Soft lavender-grey after dark. Deep, cool, unhurried."><span class="chip-dot" style="background:#af9fd8"></span>Dusk</button></div>
+        <span class="switch-label" style="margin-top:4px">Mode</span>
+        <div class="switch-row">
+          <button type="button" class="chip" data-mode="light">Light</button>
+          <button type="button" class="chip" data-mode="dark">Dark</button>
+          <button type="button" class="chip" data-mode="system">System</button>
+        </div>
+        <p class="mode-note" id="mode-note"></p>
+      </div>
+    </aside>
+
+    <main class="main" id="main"></main>
+
+    <footer>
+      Generated by <code>brand/build-boards.ts</code> from <code>docs/projects/*.md</code> —
+      eight files carrying each project's frontmatter, its written explanation, and its board as
+      a markdown checklist. Card moves are saved to this browser only.
+      Real portfolio data: not published publicly.
+    </footer>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  var ATTR = "data-shipshape-theme";
+  var THEME_LIST = [{"id":"chart-rule","family":"chart-rule","mode":"light"},{"id":"harbour-light","family":"harbour","mode":"light"},{"id":"harbour-dark","family":"harbour","mode":"dark"},{"id":"sage-light","family":"sage","mode":"light"},{"id":"sage-dark","family":"sage","mode":"dark"},{"id":"dusk-light","family":"dusk","mode":"light"},{"id":"dusk-dark","family":"dusk","mode":"dark"}];
+  var PROJECTS = [{"slug":"millwright","name":"Millwright","summary":"Needs a one-liner from you.","status":"paused","color":"#6B6257","rubric":"Discovery","score":6,"readiness":"blocked","blocking":5,"production":null,"needsDescription":true,"sections":[{"heading":"What it is","html":"\u003cp>\u003cstrong>Not documented.\u003c/strong> Same as Duebook — I do not know what Millwright is, and a guess written down here would be indistinguishable from a fact in six months.\u003c/p>\u003cp>Replace this section and the \u003ccode>summary\u003c/code> in the frontmatter.\u003c/p>"},{"heading":"Where it stands","html":"\u003cp>Paused, and the lowest score in the portfolio at 6%. Only the problem statement has been started; every other discovery criterion is untouched.\u003c/p>\u003cp>Of everything Northbound owns, this is the clearest candidate for a deliberate kill. Six percent against Discovery after being paused is not a project waiting for time — it is one waiting for a decision.\u003c/p>"},{"heading":"What is actually blocking","html":"\u003cp>All five required discovery criteria.\u003c/p>"}],"columns":[{"name":"Backlog","wipLimit":null,"isDone":false,"cards":[{"id":"millwright-backlog-0","title":"Name five people who would buy this","criterion":"disc.named-buyer","required":true,"note":null,"done":false},{"id":"millwright-backlog-1","title":"Speak to five of them","criterion":"disc.spoken-to-five","required":true,"note":null,"done":false},{"id":"millwright-backlog-2","title":"Define the smallest version worth paying for","criterion":"disc.smallest-version","required":true,"note":null,"done":false},{"id":"millwright-backlog-3","title":"Write down what would make you stop","criterion":"disc.kill-criteria","required":true,"note":null,"done":false},{"id":"millwright-backlog-4","title":"Find out what they do today instead","criterion":"disc.today-workaround","required":false,"note":null,"done":false},{"id":"millwright-backlog-5","title":"Get a willingness-to-pay signal","criterion":"disc.paid-signal","required":false,"note":null,"done":false}]},{"name":"In progress","wipLimit":3,"isDone":false,"cards":[{"id":"millwright-in-progress-0","title":"Write the problem in the customer's words","criterion":"disc.problem-statement","required":true,"note":null,"done":false}]},{"name":"Blocked","wipLimit":null,"isDone":false,"cards":[]},{"name":"Done","wipLimit":null,"isDone":true,"cards":[]}]},{"slug":"duebook","name":"Duebook","summary":"Needs a one-liner from you.","status":"paused","color":"#8A7B5C","rubric":"Discovery","score":15,"readiness":"blocked","blocking":5,"production":null,"needsDescription":true,"sections":[{"heading":"What it is","html":"\u003cp>\u003cstrong>Not documented.\u003c/strong> I do not know what Duebook is, and inventing a description would put a plausible fiction into the one place the studio looks things up.\u003c/p>\u003cp>This gap is the point of the page: a paused project nobody can describe is a project that should either be picked up or killed, and the discovery rubric below is the cheapest way to decide which.\u003c/p>\u003cp>Replace this section, and the \u003ccode>summary\u003c/code> in the frontmatter, with what it actually is.\u003c/p>"},{"heading":"Where it stands","html":"\u003cp>Paused. Scored against Discovery rather than Launch readiness, because the question is still whether it should exist.\u003c/p>"},{"heading":"What is actually blocking","html":"\u003cp>Every required discovery criterion except the problem statement, which is only started. No named buyers, no conversations, no defined smallest version, and no written kill criteria.\u003c/p>"}],"columns":[{"name":"Backlog","wipLimit":null,"isDone":false,"cards":[{"id":"duebook-backlog-0","title":"Name five people who would buy this","criterion":"disc.named-buyer","required":true,"note":null,"done":false},{"id":"duebook-backlog-1","title":"Speak to five of them","criterion":"disc.spoken-to-five","required":true,"note":null,"done":false},{"id":"duebook-backlog-2","title":"Define the smallest version worth paying for","criterion":"disc.smallest-version","required":true,"note":null,"done":false},{"id":"duebook-backlog-3","title":"Write down what would make you stop","criterion":"disc.kill-criteria","required":true,"note":null,"done":false},{"id":"duebook-backlog-4","title":"Find out what they do today instead","criterion":"disc.today-workaround","required":false,"note":null,"done":false},{"id":"duebook-backlog-5","title":"Get a willingness-to-pay signal","criterion":"disc.paid-signal","required":false,"note":null,"done":false}]},{"name":"In progress","wipLimit":3,"isDone":false,"cards":[{"id":"duebook-in-progress-0","title":"Write the problem in the customer's words","criterion":"disc.problem-statement","required":true,"note":null,"done":false}]},{"name":"Blocked","wipLimit":null,"isDone":false,"cards":[]},{"name":"Done","wipLimit":null,"isDone":true,"cards":[]}]},{"slug":"reconai","name":"ReconAI","summary":"Matches invoices against purchase orders and flags the differences.","status":"building","color":"#4A4E8C","rubric":"Launch readiness","score":28,"readiness":"blocked","blocking":10,"production":null,"needsDescription":false,"sections":[{"heading":"What it is","html":"\u003cp>Invoice reconciliation. Drop in an invoice and its purchase order; it extracts both into structured line items, matches them, and reports what differs — a quantity, a rate, a line that appears on one and not the other.\u003c/p>"},{"heading":"Who it is for","html":"\u003cp>Anyone approving invoices against POs by hand. Bookkeepers, ops managers, small finance teams.\u003c/p>"},{"heading":"Where it stands","html":"\u003cp>The earliest of the three TypeScript products by launch readiness, but the core works: invoice and PO reconcile end to end across the sample set. It is a single Next.js app with no database — state is per session, which is why several launch criteria genuinely do not apply.\u003c/p>"},{"heading":"What is actually blocking","html":"\u003cp>Everything commercial. No billing, no legal, no support route, no error tracking. The honest read is that this is a working demo rather than a product, and the discovery rubric would probably tell you more about it right now than the launch one does.\u003c/p>"}],"columns":[{"name":"Backlog","wipLimit":null,"isDone":false,"cards":[{"id":"reconai-backlog-0","title":"Live payment keys in production","criterion":"billing.live-keys","required":true,"note":null,"done":false},{"id":"reconai-backlog-1","title":"Payment webhooks verified and idempotent","criterion":"billing.webhook-verified","required":true,"note":null,"done":false},{"id":"reconai-backlog-2","title":"Paying and non-paying accounts differ server-side","criterion":"billing.entitlements","required":true,"note":null,"done":false},{"id":"reconai-backlog-3","title":"Terms of service and privacy policy","criterion":"legal.terms-and-privacy","required":true,"note":null,"done":false},{"id":"reconai-backlog-4","title":"A customer can get their data deleted","criterion":"legal.data-deletion","required":true,"note":null,"done":false},{"id":"reconai-backlog-5","title":"Errors reach a human","criterion":"infra.error-tracking","required":true,"note":null,"done":false},{"id":"reconai-backlog-6","title":"A way to reach a human","criterion":"support.contact-route","required":true,"note":null,"done":false}]},{"name":"In progress","wipLimit":3,"isDone":false,"cards":[{"id":"reconai-in-progress-0","title":"Every screen has an empty state","criterion":"product.empty-states","required":false,"note":null,"done":false},{"id":"reconai-in-progress-1","title":"Failures are visible and recoverable","criterion":"product.error-states","required":true,"note":null,"done":false},{"id":"reconai-in-progress-2","title":"Production has every environment variable","criterion":"infra.env-parity","required":true,"note":null,"done":false},{"id":"reconai-in-progress-3","title":"Marketing claims substantiated","criterion":"legal.claims-substantiated","required":true,"note":null,"done":false}]},{"name":"Blocked","wipLimit":null,"isDone":false,"cards":[]},{"name":"Done","wipLimit":null,"isDone":true,"cards":[{"id":"reconai-done-0","title":"Core flow works end to end","criterion":"product.core-flow-works","required":false,"note":"Invoice and PO reconcile across the sample set.","done":true},{"id":"reconai-done-1","title":"Deploying is one documented command","criterion":"infra.deploy-is-repeatable","required":false,"note":null,"done":true}]}]},{"slug":"quotefront","name":"Quotefront","summary":"Photo-to-quote intake for trade businesses.","status":"building","color":"#1E5D9E","rubric":"Launch readiness","score":37,"readiness":"blocked","blocking":11,"production":null,"needsDescription":false,"sections":[{"heading":"What it is","html":"\u003cp>A homeowner photographs the job. Vision reads the photos into structured findings, and the contractor's own rate card turns those findings into a priced band. The model never prices — that separation is what lets an estimate be explained line by line.\u003c/p>"},{"heading":"Who it is for","html":"\u003cp>Trade contractors — roofing, painting, flooring and three more — who lose work to whoever quotes first.\u003c/p>"},{"heading":"Where it stands","html":"\u003cp>Building. The domain is the strongest part: estimate line items reconcile exactly to the final band, with a test across all six trades. What is missing is everything around it — no billing, no legal, no error tracking.\u003c/p>"},{"heading":"What is actually blocking","html":"\u003cp>Nothing is sold yet, so all four billing criteria are open. Terms, privacy and data deletion are untouched, which matters more here than elsewhere because the product holds customers' property photos in private blob storage.\u003c/p>"}],"columns":[{"name":"Backlog","wipLimit":null,"isDone":false,"cards":[{"id":"quotefront-backlog-0","title":"Live payment keys in production","criterion":"billing.live-keys","required":true,"note":null,"done":false},{"id":"quotefront-backlog-1","title":"Payment webhooks verified and idempotent","criterion":"billing.webhook-verified","required":true,"note":null,"done":false},{"id":"quotefront-backlog-2","title":"Paying and non-paying accounts differ server-side","criterion":"billing.entitlements","required":true,"note":null,"done":false},{"id":"quotefront-backlog-3","title":"Terms of service and privacy policy","criterion":"legal.terms-and-privacy","required":true,"note":null,"done":false},{"id":"quotefront-backlog-4","title":"A customer can get their data deleted","criterion":"legal.data-deletion","required":true,"note":"Property photos are the customer's, not ours.","done":false},{"id":"quotefront-backlog-5","title":"Errors reach a human","criterion":"infra.error-tracking","required":true,"note":null,"done":false},{"id":"quotefront-backlog-6","title":"A way to reach a human","criterion":"support.contact-route","required":true,"note":null,"done":false}]},{"name":"In progress","wipLimit":3,"isDone":false,"cards":[{"id":"quotefront-in-progress-0","title":"Core flow works end to end for a new account","criterion":"product.core-flow-works","required":true,"note":null,"done":false},{"id":"quotefront-in-progress-1","title":"Failures are visible and recoverable","criterion":"product.error-states","required":true,"note":null,"done":false},{"id":"quotefront-in-progress-2","title":"SPF, DKIM and DMARC on the sending domain","criterion":"email.sender-auth","required":true,"note":null,"done":false}]},{"name":"Blocked","wipLimit":null,"isDone":false,"cards":[]},{"name":"Done","wipLimit":null,"isDone":true,"cards":[{"id":"quotefront-done-0","title":"Usable on a phone","criterion":"product.mobile","required":false,"note":"Intake is phone-first. That is where the photos are taken.","done":true},{"id":"quotefront-done-1","title":"Production has every environment variable","criterion":"infra.env-parity","required":false,"note":null,"done":true},{"id":"quotefront-done-2","title":"Database backups tested","criterion":"infra.backups","required":false,"note":null,"done":true},{"id":"quotefront-done-3","title":"Deploying is one documented command","criterion":"infra.deploy-is-repeatable","required":false,"note":null,"done":true}]}]},{"slug":"shipshape","name":"Shipshape","summary":"Kanban boards and readiness rubrics across a portfolio. This one.","status":"building","color":"#356484","rubric":"Discovery","score":44,"readiness":"blocked","blocking":3,"production":null,"needsDescription":false,"sections":[{"heading":"What it is","html":"\u003cp>A standard written once and applied to every project that should meet it. You define a rubric, apply it across the portfolio, and each project's gaps become cards on its own board carrying the criterion's guidance as acceptance criteria.\u003c/p>\u003cp>Cards name the criterion they exist to satisfy, which is what stops the rubric from decaying into a document nobody updates.\u003c/p>"},{"heading":"Who it is for","html":"\u003cp>Studios, agencies and solo founders running more than one product at a time — anyone who has been surprised twice by the same launch gap on two different projects.\u003c/p>\u003cp>Northbound is customer zero. Four more named buyers to go.\u003c/p>"},{"heading":"Where it stands","html":"\u003cp>Building. The domain is complete and tested; the app is written but has never been installed, type-checked or run, because this machine has pnpm 6 and corepack cannot fetch a newer one.\u003c/p>\u003cp>Held to Discovery rather than Launch readiness on purpose. The question is not whether it works — it is whether anyone but us would pay for it.\u003c/p>"},{"heading":"What is actually blocking","html":"\u003cp>Nobody outside Northbound has been spoken to, there is no willingness-to-pay signal, and there are no written kill criteria. Those three decide whether this gets another quarter.\u003c/p>"}],"columns":[{"name":"Backlog","wipLimit":null,"isDone":false,"cards":[{"id":"shipshape-backlog-0","title":"Speak to five studios running multiple products","criterion":"disc.spoken-to-five","required":true,"note":null,"done":false},{"id":"shipshape-backlog-1","title":"Write down what would make you stop","criterion":"disc.kill-criteria","required":true,"note":null,"done":false},{"id":"shipshape-backlog-2","title":"Get a willingness-to-pay signal","criterion":"disc.paid-signal","required":false,"note":null,"done":false},{"id":"shipshape-backlog-3","title":"Tenant isolation test, holding this product to its own security baseline","criterion":null,"required":false,"note":null,"done":false},{"id":"shipshape-backlog-4","title":"Create a project and a rubric from the UI","criterion":null,"required":false,"note":null,"done":false}]},{"name":"In progress","wipLimit":3,"isDone":false,"cards":[{"id":"shipshape-in-progress-0","title":"Name five people who would buy this","criterion":"disc.named-buyer","required":true,"note":"Northbound is one. Four to go.","done":false},{"id":"shipshape-in-progress-1","title":"Get the app running: install, typecheck, push, seed, boot","criterion":null,"required":false,"note":null,"done":false}]},{"name":"Blocked","wipLimit":null,"isDone":false,"cards":[]},{"name":"Done","wipLimit":null,"isDone":true,"cards":[{"id":"shipshape-done-0","title":"Write the problem in the customer's words","criterion":"disc.problem-statement","required":false,"note":"Eight projects, no shared definition of ready, and the same launch gap found twice by accident.","done":true},{"id":"shipshape-done-1","title":"Know what they do today instead","criterion":"disc.today-workaround","required":false,"note":"TODOS.md files that drift, and a monthly panic re-read.","done":true},{"id":"shipshape-done-2","title":"Define the smallest version worth paying for","criterion":"disc.smallest-version","required":false,"note":null,"done":true},{"id":"shipshape-done-3","title":"Rubric scoring engine, 49 tests","criterion":null,"required":false,"note":null,"done":true},{"id":"shipshape-done-4","title":"Theming system, 200 tests, every palette contrast-checked","criterion":null,"required":false,"note":null,"done":true}]}]},{"slug":"windward","name":"Windward","summary":"Portfolio grading across five pillars. Rails API plus a Python analytics engine.","status":"building","color":"#3F7A6A","rubric":"Security baseline","score":46,"readiness":"blocked","blocking":5,"production":null,"needsDescription":false,"sections":[{"heading":"What it is","html":"\u003cp>Investment portfolio grading. A Rails 8 API owns persistence and auth; a Python FastAPI service owns the analytics. Every number the product displays is computed in one of those two places, and the five pillars are the grading model.\u003c/p>"},{"heading":"Who it is for","html":"\u003cp>Not yet decided, and that is the honest answer. It is held to the security baseline rather than launch readiness because it will handle other people's financial data long before it handles their money.\u003c/p>"},{"heading":"Where it stands","html":"\u003cp>Building. Held to the security baseline deliberately: a multi-tenant product touching financial data should clear that floor before it gets a landing page.\u003c/p>"},{"heading":"What is actually blocking","html":"\u003cp>Tenant isolation and server-side authorisation are both in progress, which is the pair that matters most. Sessions are not hardened, nothing is rate limited, and there is no written inventory of the personal data it holds.\u003c/p>\u003cp>Note: its project colour in the seed was the same hex as Shipshape's accent. Moved here so the two stop reading as the same thing.\u003c/p>"}],"columns":[{"name":"Backlog","wipLimit":null,"isDone":false,"cards":[{"id":"windward-backlog-0","title":"Sessions signed, expiring and revocable","criterion":"sec.session-hardening","required":true,"note":null,"done":false},{"id":"windward-backlog-1","title":"Rate limit login and expensive endpoints","criterion":"sec.rate-limiting","required":true,"note":null,"done":false},{"id":"windward-backlog-2","title":"Written inventory of personal data held","criterion":"sec.pii-inventory","required":true,"note":null,"done":false}]},{"name":"In progress","wipLimit":3,"isDone":false,"cards":[{"id":"windward-in-progress-0","title":"Every tenant-scoped query takes an explicit tenant id","criterion":"sec.tenant-isolation","required":true,"note":"The one that must be a type error, not a convention.","done":false},{"id":"windward-in-progress-1","title":"Authorisation enforced on the server","criterion":"sec.authz-server-side","required":true,"note":null,"done":false},{"id":"windward-in-progress-2","title":"Dependency audit","criterion":"sec.dependency-audit","required":false,"note":null,"done":false}]},{"name":"Blocked","wipLimit":null,"isDone":false,"cards":[]},{"name":"Done","wipLimit":null,"isDone":true,"cards":[{"id":"windward-done-0","title":"No secret in the repository or client bundle","criterion":"sec.secrets","required":false,"note":"History scanned, not just the working tree.","done":true},{"id":"windward-done-1","title":"Vendor terms permit this use of customer data","criterion":"sec.third-party-terms","required":false,"note":null,"done":true}]}]},{"slug":"zipquarry","name":"ZipQuarry","summary":"Finds and qualifies local prospects, then writes the first email.","status":"live","color":"#B4562A","rubric":"Launch readiness","score":57,"readiness":"blocked","blocking":9,"production":"https://zipquarry.com","needsDescription":false,"sections":[{"heading":"What it is","html":"\u003cp>Outbound prospecting for local service businesses. It hunts a postal area, scores each business on how likely it is to buy, finds a contact, and drafts the first email in the operator's voice. The operator sends it — ZipQuarry never sends on their behalf.\u003c/p>"},{"heading":"Who it is for","html":"\u003cp>Small agencies and service businesses doing their own outbound, who have a territory rather than a list.\u003c/p>"},{"heading":"Where it stands","html":"\u003cp>Live, and the furthest along of anything in the portfolio. The core loop works end to end: hunt, score, find contact, draft. It is also the project with the widest gap between &quot;works&quot; and &quot;sellable&quot; — the price is published and there is no way to pay it.\u003c/p>"},{"heading":"What is actually blocking","html":"\u003cp>The $79 price is public and production holds no Stripe keys, so a visitor who decides to buy cannot. Opt-out is built and the migration is applied, but it is undeployed and there is no Resend key in production, which means bulk sending has no working unsubscribe. Both are legal exposure, not polish.\u003c/p>\u003cp>DNS is a live constraint: the nameservers stay put. Moving them to a hosting provider would kill inbound mail on the domain, and forwarding can receive but cannot send.\u003c/p>"}],"columns":[{"name":"Backlog","wipLimit":null,"isDone":false,"cards":[{"id":"zipquarry-backlog-0","title":"Live payment keys in production","criterion":"billing.live-keys","required":true,"note":"Price is public at $79. Production has no Stripe keys.","done":false},{"id":"zipquarry-backlog-1","title":"A customer can get their data deleted","criterion":"legal.data-deletion","required":true,"note":null,"done":false},{"id":"zipquarry-backlog-2","title":"Errors reach a human","criterion":"infra.error-tracking","required":true,"note":null,"done":false},{"id":"zipquarry-backlog-3","title":"Self-serve cancellation","criterion":"billing.cancellation","required":false,"note":null,"done":false},{"id":"zipquarry-backlog-4","title":"Getting-started documentation","criterion":"support.onboarding-doc","required":false,"note":null,"done":false}]},{"name":"In progress","wipLimit":3,"isDone":false,"cards":[{"id":"zipquarry-in-progress-0","title":"Deploy the unsubscribe endpoint","criterion":"email.unsubscribe","required":true,"note":"Built and migrated, but undeployed and no Resend key in production.","done":false},{"id":"zipquarry-in-progress-1","title":"Terms of service and privacy policy","criterion":"legal.terms-and-privacy","required":true,"note":null,"done":false},{"id":"zipquarry-in-progress-2","title":"SPF, DKIM and DMARC on the sending domain","criterion":"email.sender-auth","required":true,"note":null,"done":false}]},{"name":"Blocked","wipLimit":null,"isDone":false,"cards":[{"id":"zipquarry-blocked-0","title":"Verify payment webhooks are idempotent","criterion":"billing.webhook-verified","required":true,"note":"Cannot be tested until live keys exist.","done":false}]},{"name":"Done","wipLimit":null,"isDone":true,"cards":[{"id":"zipquarry-done-0","title":"Core flow works end to end","criterion":"product.core-flow-works","required":false,"note":null,"done":true},{"id":"zipquarry-done-1","title":"Entitlement checks are server-side","criterion":"billing.entitlements","required":false,"note":null,"done":true},{"id":"zipquarry-done-2","title":"Inbound mail survives the DNS setup","criterion":"email.inbound-survives-dns","required":false,"note":null,"done":true},{"id":"zipquarry-done-3","title":"Database backups tested","criterion":"infra.backups","required":false,"note":null,"done":true},{"id":"zipquarry-done-4","title":"Marketing claims substantiated","criterion":"legal.claims-substantiated","required":false,"note":null,"done":true}]}]},{"slug":"northbound-studio","name":"Northbound Studio","summary":"The studio site. The front door for everything else.","status":"live","color":"#1C1C1C","rubric":"Launch readiness","score":93,"readiness":"blocked","blocking":1,"production":null,"needsDescription":false,"sections":[{"heading":"What it is","html":"\u003cp>The studio's own marketing site. Static, no accounts, no mailing list, nothing sold — which is why most of the launch rubric legitimately does not apply to it.\u003c/p>"},{"heading":"Where it stands","html":"\u003cp>The highest score in the portfolio at 93%, and still blocked. That single blocker is the clearest demonstration of the argument Shipshape makes: a percentage does not clear a project.\u003c/p>"},{"heading":"What is actually blocking","html":"\u003cp>Terms of service and a privacy policy are in progress. It is one required criterion on an otherwise finished site, and it is why the card reads red at 93% rather than green.\u003c/p>\u003cp>Ten of this rubric's twenty criteria are marked not applicable — no billing, no mailing list, no personal data, no environment variables. That is what keeps a static site from being permanently capped by criteria written for a SaaS.\u003c/p>"}],"columns":[{"name":"Backlog","wipLimit":null,"isDone":false,"cards":[]},{"name":"In progress","wipLimit":3,"isDone":false,"cards":[{"id":"northbound-studio-in-progress-0","title":"Terms of service and privacy policy","criterion":"legal.terms-and-privacy","required":true,"note":"The only thing between this site and a clear pass.","done":false}]},{"name":"Blocked","wipLimit":null,"isDone":false,"cards":[]},{"name":"Done","wipLimit":null,"isDone":true,"cards":[{"id":"northbound-studio-done-0","title":"Core flow works end to end","criterion":"product.core-flow-works","required":false,"note":null,"done":true},{"id":"northbound-studio-done-1","title":"Usable on a phone","criterion":"product.mobile","required":false,"note":null,"done":true},{"id":"northbound-studio-done-2","title":"Marketing claims substantiated","criterion":"legal.claims-substantiated","required":false,"note":null,"done":true},{"id":"northbound-studio-done-3","title":"SPF, DKIM and DMARC on the sending domain","criterion":"email.sender-auth","required":false,"note":null,"done":true},{"id":"northbound-studio-done-4","title":"Inbound mail survives the DNS setup","criterion":"email.inbound-survives-dns","required":false,"note":null,"done":true},{"id":"northbound-studio-done-5","title":"Deploying is one documented command","criterion":"infra.deploy-is-repeatable","required":false,"note":null,"done":true},{"id":"northbound-studio-done-6","title":"A way to reach a human","criterion":"support.contact-route","required":false,"note":null,"done":true}]}]}];
+  var TOTALS = {"projects":8,"blocking":49,"cards":83,"undocumented":2};
+  var READINESS = {"blocked":"Blocked","at_risk":"At risk","on_track":"On track","ready":"Ready"};
+
+  var K_FAMILY = "shipshape.theme.family";
+  var K_MODE = "shipshape.theme.mode";
+  var K_BOARD = "shipshape.boards.v1";
+
+  function read(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function write(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+  var family = read(K_FAMILY) || "harbour";
+  var modePref = read(K_MODE) || "system";
+  var media = window.matchMedia("(prefers-color-scheme: dark)");
+  var view = "portfolio";
+  var current = PROJECTS[0].slug;
+
+  // Restore any moved cards. Board state is per browser: this is a preview, and
+  // the real board lives in Postgres.
+  try {
+    var saved = JSON.parse(read(K_BOARD) || "{}");
+    PROJECTS.forEach(function (p) {
+      var s = saved[p.slug];
+      if (!s) return;
+      var all = {};
+      p.columns.forEach(function (c) { c.cards.forEach(function (card) { all[card.id] = card; }); });
+      p.columns.forEach(function (c) { c.cards = []; });
+      Object.keys(s).forEach(function (cardId) {
+        var card = all[cardId];
+        var col = p.columns.filter(function (c) { return c.name === s[cardId]; })[0];
+        if (card && col) { col.cards.push(card); delete all[cardId]; }
+      });
+      // Anything the save did not mention (a card added since) goes back to its
+      // original column rather than vanishing.
+      Object.keys(all).forEach(function (id) {
+        var origin = id.split("-").slice(1, -1).join(" ");
+        var col = p.columns.filter(function (c) { return c.name.toLowerCase() === origin; })[0] || p.columns[0];
+        col.cards.push(all[id]);
+      });
+    });
+  } catch (e) {}
+
+  function saveBoards() {
+    var out = {};
+    PROJECTS.forEach(function (p) {
+      out[p.slug] = {};
+      p.columns.forEach(function (c) {
+        c.cards.forEach(function (card) { out[p.slug][card.id] = c.name; });
+      });
+    });
+    write(K_BOARD, JSON.stringify(out));
+  }
+
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function project(slug) { return PROJECTS.filter(function (p) { return p.slug === slug; })[0]; }
+  function readinessClass(r) { return r.replace("_", "-"); }
+
+  // --- Theme -------------------------------------------------------------
+
+  function resolvedMode() { return modePref === "system" ? (media.matches ? "dark" : "light") : modePref; }
+
+  function applyTheme() {
+    var inFamily = THEME_LIST.filter(function (t) { return t.family === family; });
+    var mode = resolvedMode();
+    var theme = inFamily.filter(function (t) { return t.mode === mode; })[0] || inFamily[0] || THEME_LIST[0];
+
+    document.documentElement.setAttribute(ATTR, theme.id);
+    document.documentElement.style.colorScheme = theme.mode;
+
+    document.querySelectorAll("[data-family]").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.family === family));
+    });
+
+    var hasDark = THEME_LIST.some(function (t) { return t.family === family && t.mode === "dark"; });
+    var hasLight = THEME_LIST.some(function (t) { return t.family === family && t.mode === "light"; });
+    document.querySelectorAll("[data-mode]").forEach(function (b) {
+      var dead = (b.dataset.mode === "dark" && !hasDark) || (b.dataset.mode === "light" && !hasLight);
+      b.disabled = dead;
+      b.setAttribute("aria-pressed", String(b.dataset.mode === modePref));
+    });
+
+    var note = document.getElementById("mode-note");
+    note.textContent = (!hasDark || !hasLight)
+      ? "This theme is " + theme.mode + "-only by design."
+      : (modePref === "system" ? "Following your system: " + resolvedMode() + "." : "");
+  }
+
+  // --- Rail --------------------------------------------------------------
+
+  function renderRail() {
+    document.getElementById("rail").innerHTML = PROJECTS.map(function (p) {
+      return '<button type="button" class="rail-item" data-project="' + p.slug + '" aria-current="' +
+        (view === "project" && p.slug === current) + '">' +
+        '<span class="rail-top"><span class="dot" style="background:' + p.color + '"></span>' +
+        '<span class="rail-name">' + esc(p.name) + '</span>' +
+        '<span class="rail-score">' + p.score + '%</span></span>' +
+        '<span class="rail-bar"><span class="fill-' + readinessClass(p.readiness) +
+        '" style="width:' + p.score + '%"></span></span></button>';
+    }).join("");
+
+    document.querySelector('[data-view="portfolio"]').setAttribute("aria-current", String(view === "portfolio"));
+  }
+
+  // --- Views -------------------------------------------------------------
+
+  function renderPortfolio() {
+    var worst = PROJECTS.slice().sort(function (a, b) { return a.score - b.score; });
+
+    return '<div class="head"><div><h2>Every project</h2>' +
+      '<p class="summary">Eight projects, three rubrics, one standard each. Sorted worst first, because that is the order the work gets done in.</p></div></div>' +
+
+      '<div class="stats">' +
+      stat("Projects", TOTALS.projects) +
+      stat("Blocking criteria", TOTALS.blocking) +
+      stat("Cards", TOTALS.cards) +
+      stat("Undocumented", TOTALS.undocumented) +
+      '</div>' +
+
+      (TOTALS.undocumented > 0
+        ? '<div class="warn"><strong>' + TOTALS.undocumented + ' projects have no written description.</strong> ' +
+          'A paused project nobody can describe is one that should be picked up or killed. ' +
+          'Open them below and fill in <code>docs/projects/&lt;slug&gt;.md</code>.</div>'
+        : "") +
+
+      '<div class="grid">' + worst.map(function (p) {
+        return '<button type="button" class="pcard" data-project="' + p.slug + '">' +
+          '<h3><span class="dot" style="background:' + p.color + '"></span>' + esc(p.name) + '</h3>' +
+          '<p class="summary">' + esc(p.summary) + '</p>' +
+          '<div class="bar"><span class="fill-' + readinessClass(p.readiness) + '" style="width:' + p.score + '%"></span></div>' +
+          '<div class="foot"><span class="pill pill-' + readinessClass(p.readiness) + '">' +
+          (READINESS[p.readiness] || p.readiness) +
+          (p.blocking ? ' <span class="n">' + p.blocking + '</span>' : "") + '</span>' +
+          '<span class="rail-score">' + p.score + '%</span></div></button>';
+      }).join("") + '</div>';
+  }
+
+  function stat(k, v) {
+    return '<div class="panel stat"><div class="k">' + k + '</div><div class="v">' + v + '</div></div>';
+  }
+
+  function renderProject(p) {
+    var context = p.sections.map(function (s) {
+      return '<section class="panel"><h3>' + esc(s.heading) + '</h3>' + s.html + '</section>';
+    }).join("");
+
+    return '<div class="head">' +
+      '<div><h2><span class="dot" style="background:' + p.color + '"></span>' + esc(p.name) + '</h2>' +
+      '<p class="summary">' + esc(p.summary) + '</p>' +
+      '<div class="meta">' +
+      '<span class="pill pill-neutral">' + esc(p.status) + '</span>' +
+      '<span class="pill pill-' + readinessClass(p.readiness) + '">' + (READINESS[p.readiness] || p.readiness) +
+      (p.blocking ? ' <span class="n">' + p.blocking + '</span>' : "") + '</span>' +
+      (p.production ? '<a class="tagline" href="' + p.production + '" target="_blank" rel="noreferrer">' + esc(p.production) + '</a>' : "") +
+      '</div></div>' +
+      '<div class="scoreblock"><div class="n" style="color:var(--color-' + readinessClass(p.readiness) + ')">' + p.score + '%</div>' +
+      '<div class="rubric">' + esc(p.rubric) + '</div></div>' +
+      '</div>' +
+
+      (p.needsDescription
+        ? '<div class="warn"><strong>This project has no description.</strong> Nobody can tell you what it is, ' +
+          'which is itself the finding. Write it into <code>docs/projects/' + p.slug + '.md</code>.</div>'
+        : "") +
+
+      '<div class="panel pad"><div class="bar"><span class="fill-' + readinessClass(p.readiness) +
+      '" style="width:' + p.score + '%"></span></div></div>' +
+
+      '<details class="context-toggle" open><summary>Context</summary>' +
+      '<div class="context">' + context + '</div></details>' +
+
+      '<div class="board">' + p.columns.map(renderColumn).join("") + '</div>';
+  }
+
+  function renderColumn(col) {
+    var over = col.wipLimit !== null && col.cards.length > col.wipLimit;
+    var count = col.wipLimit !== null ? col.cards.length + "/" + col.wipLimit : String(col.cards.length);
+
+    return '<section class="column' + (over ? " over" : "") + '" data-column="' + esc(col.name) + '">' +
+      '<div class="col-head"><h4>' + esc(col.name) + '</h4>' +
+      '<span class="count' + (over ? " over" : "") + '">' + count + '</span></div>' +
+      (over ? '<p class="col-warn">Over the ' + col.wipLimit + ' card limit. Finish something before starting more.</p>' : "") +
+      '<div class="col-body">' +
+      (col.cards.length ? col.cards.map(function (c) { return renderCard(c, col); }).join("")
+        : '<p class="col-empty">' + (col.isDone ? "Nothing finished yet." : "Nothing here.") + '</p>') +
+      '</div></section>';
+  }
+
+  function renderCard(card, col) {
+    var tags = "";
+    if (card.criterion) tags += '<span class="tag tag-criterion">' + esc(card.criterion) + '</span>';
+    if (card.required) tags += '<span class="tag tag-required">required</span>';
+
+    return '<article class="card' + (col.isDone ? " done" : "") + '" draggable="true" tabindex="0" data-card="' + card.id + '">' +
+      '<p class="card-title">' + esc(card.title) + '</p>' +
+      (card.note ? '<p class="card-note">' + esc(card.note) + '</p>' : "") +
+      (tags ? '<div class="tags">' + tags + '</div>' : "") +
+      '<div class="move">' +
+      '<button type="button" data-move="-1" aria-label="Move left">&larr;</button>' +
+      '<button type="button" data-move="1" aria-label="Move right">&rarr;</button>' +
+      '</div></article>';
+  }
+
+  // --- Card movement ------------------------------------------------------
+
+  function moveCard(cardId, toColumnName) {
+    var p = project(current);
+    var card = null;
+    p.columns.forEach(function (c) {
+      var i = c.cards.findIndex(function (x) { return x.id === cardId; });
+      if (i > -1) card = c.cards.splice(i, 1)[0];
+    });
+    if (!card) return;
+    var target = p.columns.filter(function (c) { return c.name === toColumnName; })[0] || p.columns[0];
+    target.cards.push(card);
+    saveBoards();
+    render();
+  }
+
+  function shift(cardId, direction) {
+    var p = project(current);
+    var from = -1;
+    p.columns.forEach(function (c, i) {
+      if (c.cards.some(function (x) { return x.id === cardId; })) from = i;
+    });
+    var to = p.columns[from + direction];
+    if (to) moveCard(cardId, to.name);
+  }
+
+  // --- Wiring -------------------------------------------------------------
+
+  function render() {
+    renderRail();
+    var main = document.getElementById("main");
+    main.innerHTML = view === "portfolio" ? renderPortfolio() : renderProject(project(current));
+    if (view === "project") wireBoard();
+  }
+
+  function wireBoard() {
+    var dragged = null;
+
+    document.querySelectorAll(".card").forEach(function (el) {
+      el.addEventListener("dragstart", function (e) {
+        dragged = el.dataset.card;
+        e.dataTransfer.setData("text/plain", dragged);
+        e.dataTransfer.effectAllowed = "move";
+        el.classList.add("dragging");
+      });
+      el.addEventListener("dragend", function () {
+        el.classList.remove("dragging");
+        document.querySelectorAll(".column").forEach(function (c) { c.classList.remove("dragover"); });
+      });
+    });
+
+    document.querySelectorAll(".column").forEach(function (col) {
+      col.addEventListener("dragover", function (e) { e.preventDefault(); col.classList.add("dragover"); });
+      col.addEventListener("dragleave", function () { col.classList.remove("dragover"); });
+      col.addEventListener("drop", function (e) {
+        e.preventDefault();
+        col.classList.remove("dragover");
+        var id = e.dataTransfer.getData("text/plain") || dragged;
+        if (id) moveCard(id, col.dataset.column);
+      });
+    });
+
+    // The keyboard path. A drag is not something a keyboard user can perform,
+    // so these are the accessible route, not a fallback.
+    document.querySelectorAll("[data-move]").forEach(function (b) {
+      b.addEventListener("click", function (e) {
+        e.stopPropagation();
+        shift(b.closest(".card").dataset.card, Number(b.dataset.move));
+      });
+    });
+  }
+
+  document.addEventListener("click", function (e) {
+    var pick = e.target.closest("[data-project]");
+    if (pick) { current = pick.dataset.project; view = "project"; render(); window.scrollTo({ top: 0, behavior: "smooth" }); return; }
+
+    var all = e.target.closest('[data-view="portfolio"]');
+    if (all) { view = "portfolio"; render(); return; }
+
+    var fam = e.target.closest("[data-family]");
+    if (fam) { family = fam.dataset.family; write(K_FAMILY, family); applyTheme(); return; }
+
+    var mode = e.target.closest("[data-mode]");
+    if (mode && !mode.disabled) { modePref = mode.dataset.mode; write(K_MODE, modePref); applyTheme(); }
+  });
+
+  media.addEventListener("change", function () { if (modePref === "system") applyTheme(); });
+
+  applyTheme();
+  render();
+})();
+</script>
+</body>
+</html>
