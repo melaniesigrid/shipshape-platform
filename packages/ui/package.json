@@ -3,13 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Chart & Rule — design tokens and presentational primitives.",
+  "description": "Chart & Rule \u2014 design tokens and presentational primitives.",
   "exports": {
     ".": "./src/index.ts",
-    "./tokens.css": "./src/tokens.css"
+    "./tokens.css": "./src/tokens.css",
+    "./themes.css": "./src/themes.generated.css"
   },
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node --test 'test/*.test.ts'",
+    "build:css": "node ../../brand/build-kanban.ts"
   },
   "peerDependencies": {
     "react": "^19.0.0"
