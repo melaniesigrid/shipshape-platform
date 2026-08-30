@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chart &amp; Rule</title>
+<meta name="description" content="The Shipshape visual identity: palette, type, and the components that carry the product's one argument.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Hanken+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/*
+ * Chart & Rule — the Shipshape identity, shown working.
+ *
+ * Single-theme by deliberate choice, not omission: Shipshape is the light one
+ * in the Northbound range (Quotefront owns the dark end), and it is read for
+ * long stretches like a document rather than glanced at like a monitor. Every
+ * colour is painted explicitly so the page holds on any host ground.
+ */
+
+:root {
+  /* Ground — warm off-whites. Never pure #fff; chart paper has age in it. */
+  --paper: #f6f4ef;
+  --card: #fffdf9;
+  --sunk: #eceae3;
+
+  /* Ink — green-black, so it sits under the sea-green rather than beside it. */
+  --ink: #14211e;
+  --ink-soft: #47544f;
+  --ink-faint: #7c8783;
+  --hair: rgba(20, 33, 30, 0.1);
+  --hair-strong: rgba(20, 33, 30, 0.2);
+
+  /* Accent */
+  --sea: #2f6f62;
+  --sea-deep: #22544a;
+  --sea-soft: rgba(47, 111, 98, 0.1);
+
+  /* Reserved signal colours. Four states, four hues, used nowhere else. */
+  --blocked: #b4442e;
+  --blocked-soft: rgba(180, 68, 46, 0.12);
+  --at-risk: #b57a17;
+  --at-risk-soft: rgba(181, 122, 23, 0.14);
+  --on-track: #2f6f8f;
+  --on-track-soft: rgba(47, 111, 143, 0.12);
+  --ready: #2f7a4e;
+  --ready-soft: rgba(47, 122, 78, 0.12);
+  --waived: #6d5b8f;
+  --waived-soft: rgba(109, 91, 143, 0.12);
+
+  --display: "Fraunces", ui-serif, Georgia, serif;
+  --body: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --radius: 6px;
+  --shadow-card: 0 1px 2px rgba(20, 33, 30, 0.05), 0 8px 24px rgba(20, 33, 30, 0.04);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background-color: var(--paper);
+  /* The chart rule behind everything: 32px, at 3%. Felt more than seen. */
+  background-image:
+    linear-gradient(to right, rgba(20, 33, 30, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20, 33, 30, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 64px 32px 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+h1, h2, h3 {
+  font-family: var(--display);
+  font-weight: 550;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  margin: 0;
+}
+
+p { margin: 0; max-width: 68ch; }
+
+a { color: var(--sea); }
+
+code, .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+:focus-visible {
+  outline: 2px solid var(--sea);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* ---------------------------------------------------------------------- */
+/* The drafting rule. Section dividers are a ruler's edge, not a hairline:  */
+/* minor ticks every 8px, major every 48px, both hanging from the baseline. */
+/* ---------------------------------------------------------------------- */
+
+.rule {
+  height: 14px;
+  border-bottom: 1px solid var(--hair-strong);
+  background-image:
+    repeating-linear-gradient(to right, var(--hair-strong) 0 1px, transparent 1px 48px),
+    repeating-linear-gradient(to right, var(--hair) 0 1px, transparent 1px 8px);
+  background-size: 100% 11px, 100% 5px;
+  background-position: bottom left, bottom left;
+  background-repeat: no-repeat;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+section { display: flex; flex-direction: column; gap: 20px; }
+
+.section-head { display: flex; flex-direction: column; gap: 6px; }
+.section-head h2 { font-size: 21px; }
+.section-head p { font-size: 14px; color: var(--ink-soft); }
+
+.panel {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: 0 0 0 1px var(--hair), var(--shadow-card);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Masthead                                                                */
+/* ---------------------------------------------------------------------- */
+
+.masthead { display: flex; flex-direction: column; gap: 18px; }
+
+.wordmark {
+  font-family: var(--display);
+  font-size: clamp(46px, 9vw, 76px);
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  font-variation-settings: "SOFT" 20;
+}
+
+.tagline {
+  font-family: var(--display);
+  font-size: clamp(19px, 3.2vw, 25px);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--sea);
+  letter-spacing: -0.01em;
+}
+
+.thesis { font-size: 16px; color: var(--ink-soft); max-width: 62ch; }
+.thesis strong { color: var(--ink); font-weight: 600; }
+
+/* ---------------------------------------------------------------------- */
+/* The argument — the one thing the identity has to carry                  */
+/* ---------------------------------------------------------------------- */
+
+.argument { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 720px) { .argument { grid-template-columns: 1fr; } }
+
+.proof { padding: 22px; display: flex; flex-direction: column; gap: 14px; }
+
+.proof-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.proof-name { font-size: 15px; font-weight: 600; }
+.proof-score {
+  font-family: var(--display);
+  font-size: 34px;
+  font-weight: 550;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.proof-note { font-size: 13px; color: var(--ink-soft); }
+.proof-note em { color: var(--blocked); font-style: normal; font-weight: 600; }
+
+/* ---------------------------------------------------------------------- */
+/* Components                                                              */
+/* ---------------------------------------------------------------------- */
+
+.bar {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--sunk);
+  overflow: hidden;
+}
+.bar > span { display: block; height: 100%; border-radius: 999px; }
+
+.fill-blocked  { background: var(--blocked); }
+.fill-at-risk  { background: var(--at-risk); }
+.fill-on-track { background: var(--on-track); }
+.fill-ready    { background: var(--ready); }
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.pill .count { font-family: var(--mono); font-size: 11px; opacity: 0.8; }
+
+.pill-blocked  { background: var(--blocked-soft);  color: var(--blocked); }
+.pill-at-risk  { background: var(--at-risk-soft);  color: var(--at-risk); }
+.pill-on-track { background: var(--on-track-soft); color: var(--on-track); }
+.pill-ready    { background: var(--ready-soft);    color: var(--ready); }
+.pill-waived   { background: var(--waived-soft);   color: var(--waived); }
+.pill-none     { background: var(--sunk);          color: var(--ink-faint); }
+
+.key {
+  font-family: var(--mono);
+  font-size: 11px;
+  background: var(--sunk);
+  color: var(--ink-faint);
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+/* Palette ---------------------------------------------------------------- */
+
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: 12px; }
+
+.swatch { display: flex; flex-direction: column; gap: 8px; }
+.chip {
+  height: 62px;
+  border-radius: var(--radius);
+  box-shadow: inset 0 0 0 1px var(--hair);
+}
+.swatch-name { font-size: 13px; font-weight: 500; }
+.swatch-hex { font-family: var(--mono); font-size: 11px; color: var(--ink-faint); }
+.swatch-use { font-size: 12px; color: var(--ink-soft); line-height: 1.45; }
+
+/* Type ------------------------------------------------------------------- */
+
+.faces { display: flex; flex-direction: column; gap: 0; }
+.face {
+  padding: 22px;
+  border-bottom: 1px solid var(--hair);
+  display: grid;
+  grid-template-columns: 168px 1fr;
+  gap: 24px;
+  align-items: baseline;
+}
+.face:last-child { border-bottom: 0; }
+@media (max-width: 720px) { .face { grid-template-columns: 1fr; gap: 10px; } }
+
+.face-meta { display: flex; flex-direction: column; gap: 3px; }
+.face-name { font-size: 14px; font-weight: 600; }
+.face-role { font-size: 12px; color: var(--ink-soft); line-height: 1.45; }
+
+.specimen-display { font-family: var(--display); font-size: 32px; font-weight: 550; letter-spacing: -0.02em; }
+.specimen-body { font-family: var(--body); font-size: 17px; color: var(--ink-soft); }
+.specimen-mono { font-family: var(--mono); font-size: 15px; color: var(--ink-soft); }
+
+/* Criterion row ---------------------------------------------------------- */
+
+.rows > * { border-bottom: 1px solid var(--hair); }
+.rows > *:last-child { border-bottom: 0; }
+
+.row { padding: 14px 22px; display: flex; gap: 16px; align-items: flex-start; }
+.row-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+.row-title { font-size: 14px; font-weight: 500; display: flex; align-items: baseline; gap: 7px; flex-wrap: wrap; }
+.req { color: var(--blocked); font-family: var(--mono); }
+.weight { font-family: var(--mono); font-size: 11px; color: var(--ink-faint); }
+.row-guidance { font-size: 12.5px; color: var(--ink-faint); line-height: 1.5; max-width: 74ch; }
+.row-note { font-size: 12.5px; color: var(--ink-faint); font-style: italic; }
+.row-suggest {
+  font-size: 12.5px;
+  color: var(--on-track);
+  background: var(--on-track-soft);
+  padding: 5px 10px;
+  border-radius: var(--radius);
+  align-self: flex-start;
+}
+
+/* Board ------------------------------------------------------------------ */
+
+.board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+@media (max-width: 720px) { .board { grid-template-columns: 1fr; } }
+
+.column {
+  background: rgba(236, 234, 227, 0.6);
+  border-radius: var(--radius);
+  box-shadow: 0 0 0 1px var(--hair);
+  display: flex;
+  flex-direction: column;
+}
+.column.over-limit { box-shadow: 0 0 0 1px rgba(181, 122, 23, 0.5); }
+
+.column-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--hair);
+  font-size: 13px;
+  font-weight: 500;
+}
+.column-count { font-family: var(--mono); font-size: 11px; color: var(--ink-faint); }
+.column-count.warn { color: var(--at-risk); }
+
+.column-warn {
+  font-size: 12px;
+  color: var(--at-risk);
+  background: var(--at-risk-soft);
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--hair);
+}
+
+.column-body { padding: 8px; display: flex; flex-direction: column; gap: 8px; }
+
+.task {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: 0 0 0 1px var(--hair);
+  padding: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.task-title { font-size: 13px; font-weight: 500; line-height: 1.35; }
+.task-labels { display: flex; flex-wrap: wrap; gap: 5px; }
+.tag { font-size: 10px; padding: 2px 6px; border-radius: 3px; background: var(--sunk); color: var(--ink-faint); }
+.tag-criterion { font-family: var(--mono); background: var(--sea-soft); color: var(--sea); }
+.tag-required { background: var(--blocked-soft); color: var(--blocked); }
+
+/* Portfolio table -------------------------------------------------------- */
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+caption { text-align: left; padding: 16px 22px 0; font-size: 13px; color: var(--ink-soft); }
+th, td { padding: 10px 14px; }
+th:first-child, td:first-child { padding-left: 22px; }
+th:last-child, td:last-child { padding-right: 22px; }
+thead th { text-align: left; font-weight: 500; font-size: 12px; color: var(--ink-soft); border-bottom: 1px solid var(--hair-strong); }
+tbody tr { border-bottom: 1px solid var(--hair); }
+tbody tr:last-child { border-bottom: 0; }
+td.num { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+td.barcell { width: 34%; min-width: 130px; }
+.project-name { font-weight: 500; }
+.project-dot { display: inline-block; width: 8px; height: 8px; border-radius: 999px; margin-right: 8px; vertical-align: middle; }
+
+/* Closing ---------------------------------------------------------------- */
+
+.notes { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 720px) { .notes { grid-template-columns: 1fr; } }
+.note { padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+.note h3 { font-size: 15px; }
+.note p, .note li { font-size: 13.5px; color: var(--ink-soft); }
+.note ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 5px; }
+
+footer { font-size: 12.5px; color: var(--ink-faint); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <div class="eyebrow">Northbound Studio · identity 01 · Chart &amp; Rule</div>
+    <div class="wordmark">Shipshape</div>
+    <div class="tagline">One standard, every project.</div>
+    <p class="thesis">
+      The reference is an admiralty chart and a drafting rule, not a SaaS dashboard.
+      Warm paper, sea-green ink, hairline rules, and <strong>four signal colours reserved
+      for readiness alone</strong>. The surface stays quiet so the status does all the
+      shouting — because the product's only job is to tell you plainly what is not ready.
+    </p>
+  </header>
+
+  <div class="rule"></div>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">The argument</div>
+      <h2>Colour comes from readiness, never from the number</h2>
+      <p>
+        Both projects below are scored against the same rubric. The one on the left is
+        further along and reads red, because a required criterion is unmet — and nine
+        tenths of a launch is not a launch. If the identity carries one idea, it is this one.
+      </p>
+    </div>
+
+    <div class="argument">
+      <div class="panel proof">
+        <div class="proof-top">
+          <div>
+            <div class="proof-name">Northbound Studio</div>
+            <div class="eyebrow">Launch readiness</div>
+          </div>
+          <div class="proof-score" style="color: var(--blocked);">93%</div>
+        </div>
+        <div class="bar"><span class="fill-blocked" style="width: 93%;"></span></div>
+        <div class="proof-top">
+          <span class="pill pill-blocked">Blocked <span class="count">1</span></span>
+          <span class="proof-note">Terms and privacy still <em>in progress</em></span>
+        </div>
+      </div>
+
+      <div class="panel proof">
+        <div class="proof-top">
+          <div>
+            <div class="proof-name">Quotefront</div>
+            <div class="eyebrow">Launch readiness</div>
+          </div>
+          <div class="proof-score" style="color: var(--on-track);">37%</div>
+        </div>
+        <div class="bar"><span class="fill-on-track" style="width: 37%;"></span></div>
+        <div class="proof-top">
+          <span class="pill pill-on-track">On track</span>
+          <span class="proof-note">Early, but nothing required is overdue</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">Palette</div>
+      <h2>Ground, ink, accent</h2>
+      <p>Green-black ink rather than grey-black, so it sits under the sea-green instead of beside it. No pure white anywhere — chart paper has age in it.</p>
+    </div>
+
+    <div class="swatches">
+      <div class="swatch">
+        <div class="chip" style="background: #f6f4ef;"></div>
+        <div><div class="swatch-name">Paper</div><div class="swatch-hex">#F6F4EF</div></div>
+        <div class="swatch-use">The ground, ruled at 32px</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: #fffdf9;"></div>
+        <div><div class="swatch-name">Card</div><div class="swatch-hex">#FFFDF9</div></div>
+        <div class="swatch-use">Raised surfaces</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: #eceae3;"></div>
+        <div><div class="swatch-name">Sunk</div><div class="swatch-hex">#ECEAE3</div></div>
+        <div class="swatch-use">Wells, tracks, board columns</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: #14211e;"></div>
+        <div><div class="swatch-name">Ink</div><div class="swatch-hex">#14211E</div></div>
+        <div class="swatch-use">Body and headings</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: #2f6f62;"></div>
+        <div><div class="swatch-name">Sea</div><div class="swatch-hex">#2F6F62</div></div>
+        <div class="swatch-use">The only accent. Actions, links, criterion tags</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: #22544a;"></div>
+        <div><div class="swatch-name">Sea deep</div><div class="swatch-hex">#22544A</div></div>
+        <div class="swatch-use">Hover and pressed</div>
+      </div>
+    </div>
+
+    <div class="section-head" style="margin-top: 12px;">
+      <div class="eyebrow">Reserved</div>
+      <h2 style="font-size: 17px;">Four signal colours, used nowhere else</h2>
+      <p>The moment one of these appears decoratively it stops meaning anything. They are not part of the accent system and never carry brand duty.</p>
+    </div>
+
+    <div class="swatches">
+      <div class="swatch">
+        <div class="chip" style="background: #b4442e;"></div>
+        <div><div class="swatch-name">Blocked</div><div class="swatch-hex">#B4442E</div></div>
+        <div class="swatch-use">A required criterion is unmet, at any score</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: #b57a17;"></div>
+        <div><div class="swatch-name">At risk</div><div class="swatch-hex">#B57A17</div></div>
+        <div class="swatch-use">Below pass, and behind. Also WIP limits</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: #2f6f8f;"></div>
+        <div><div class="swatch-name">On track</div><div class="swatch-hex">#2F6F8F</div></div>
+        <div class="swatch-use">Below pass, but moving</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: #2f7a4e;"></div>
+        <div><div class="swatch-name">Ready</div><div class="swatch-hex">#2F7A4E</div></div>
+        <div class="swatch-use">Clears the threshold, nothing blocking</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: #6d5b8f;"></div>
+        <div><div class="swatch-name">Waived</div><div class="swatch-hex">#6D5B8F</div></div>
+        <div class="swatch-use">Row level, not project level. A decision on the record</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">Typography</div>
+      <h2>Three faces, three jobs</h2>
+      <p>A chart-plate serif for headings and figures, a plain grotesque for prose, and a mono for identifiers — because a criterion key is an identifier and should read like one.</p>
+    </div>
+
+    <div class="panel faces">
+      <div class="face">
+        <div class="face-meta">
+          <div class="face-name">Fraunces</div>
+          <div class="face-role">Display. Headings, scores, the wordmark. Soft axis raised slightly; used with restraint.</div>
+        </div>
+        <div class="specimen-display">Launch readiness 93%</div>
+      </div>
+      <div class="face">
+        <div class="face-meta">
+          <div class="face-name">Hanken Grotesk</div>
+          <div class="face-role">Body. Every sentence a person actually reads.</div>
+        </div>
+        <div class="specimen-body">A required criterion that is unmet blocks the project at any percentage.</div>
+      </div>
+      <div class="face">
+        <div class="face-meta">
+          <div class="face-name">JetBrains Mono</div>
+          <div class="face-role">Utility. Criterion keys, weights, counts, and every figure that lines up in a column.</div>
+        </div>
+        <div class="specimen-mono">billing.live-keys · 10pt · 57%</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">Components</div>
+      <h2>The rubric row</h2>
+      <p>Real criteria from the launch-readiness rubric, at three of the five statuses. Guidance sits under the title because it is the acceptance criteria, not a tooltip.</p>
+    </div>
+
+    <div class="panel rows">
+      <div class="row">
+        <div class="row-main">
+          <div class="row-title">Live payment keys are set in production <span class="req">*</span> <span class="weight">10pt</span></div>
+          <div class="row-guidance">A public price with test keys behind it is a broken promise, not a soft launch.</div>
+          <div><span class="key">billing.live-keys</span></div>
+        </div>
+        <span class="pill pill-none">Not started</span>
+      </div>
+
+      <div class="row">
+        <div class="row-main">
+          <div class="row-title">Every bulk email carries a working unsubscribe <span class="req">*</span> <span class="weight">8pt</span></div>
+          <div class="row-guidance">One click, no login, honoured on the next send. Built but undeployed does not count.</div>
+          <div><span class="key">email.unsubscribe</span></div>
+          <div class="row-suggest">The board suggests <strong>In progress</strong> — 1 of 2 cards are done.</div>
+        </div>
+        <span class="pill pill-at-risk">In progress</span>
+      </div>
+
+      <div class="row">
+        <div class="row-main">
+          <div class="row-title">Inbound mail survives the DNS setup <span class="req">*</span> <span class="weight">5pt</span></div>
+          <div class="row-guidance">Confirmed against live DNS, from the address the product actually sends from.</div>
+          <div><span class="key">email.inbound-survives-dns</span></div>
+          <div class="row-note">Nameservers stay put — moving them would kill @zipquarry.com mail.</div>
+        </div>
+        <span class="pill pill-ready">Met</span>
+      </div>
+
+      <div class="row">
+        <div class="row-main">
+          <div class="row-title">Usable on a phone <span class="weight">4pt</span></div>
+          <div class="row-guidance">Desktop tool. Nobody reconciles a purchase order on a phone.</div>
+          <div><span class="key">product.mobile</span></div>
+        </div>
+        <span class="pill pill-none">N/A</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2 style="font-size: 17px;">The board</h2>
+      <p>Cards generated from the rubric's gaps carry the criterion key they exist to satisfy. That tag is the whole join between the two halves of the product.</p>
+    </div>
+
+    <div class="board">
+      <div class="column">
+        <div class="column-head"><span>Backlog</span><span class="column-count">4</span></div>
+        <div class="column-body">
+          <div class="task">
+            <div class="task-title">Live payment keys are set in production</div>
+            <div class="task-labels">
+              <span class="tag tag-criterion">billing.live-keys</span>
+              <span class="tag tag-required">required</span>
+            </div>
+          </div>
+          <div class="task">
+            <div class="task-title">Errors reach a human</div>
+            <div class="task-labels">
+              <span class="tag tag-criterion">infra.error-tracking</span>
+              <span class="tag tag-required">required</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="column over-limit">
+        <div class="column-head"><span>In progress</span><span class="column-count warn">3/2</span></div>
+        <div class="column-warn">Over the 2 card limit. Finish something before starting more.</div>
+        <div class="column-body">
+          <div class="task">
+            <div class="task-title">Ship the unsubscribe endpoint</div>
+            <div class="task-labels">
+              <span class="tag tag-criterion">email.unsubscribe</span>
+              <span class="tag">email</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="column-head"><span>Done</span><span class="column-count">9</span></div>
+        <div class="column-body">
+          <div class="task">
+            <div class="task-title">Confirm inbound mail survives DNS</div>
+            <div class="task-labels">
+              <span class="tag tag-criterion">email.inbound-survives-dns</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">In use</div>
+      <h2>The portfolio, as it actually stands</h2>
+      <p>Eight real Northbound projects against three rubrics — the numbers the seed produces today, not a mockup. This is the view the studio runs on.</p>
+    </div>
+
+    <div class="panel table-wrap">
+      <table>
+        <caption>Scored 29 August 2026. Sorted worst first, because that is the order the work gets done in.</caption>
+        <thead>
+          <tr>
+            <th scope="col">Project</th>
+            <th scope="col">Rubric</th>
+            <th scope="col">Progress</th>
+            <th scope="col" style="text-align: right;">Score</th>
+            <th scope="col" style="text-align: right;">Readiness</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="project-name"><span class="project-dot" style="background:#6B6257;"></span>Millwright</td>
+            <td>Discovery</td>
+            <td class="barcell"><div class="bar"><span class="fill-blocked" style="width:6%;"></span></div></td>
+            <td class="num">6%</td>
+            <td class="num"><span class="pill pill-blocked">Blocked <span class="count">5</span></span></td>
+          </tr>
+          <tr>
+            <td class="project-name"><span class="project-dot" style="background:#8A7B5C;"></span>Duebook</td>
+            <td>Discovery</td>
+            <td class="barcell"><div class="bar"><span class="fill-blocked" style="width:15%;"></span></div></td>
+            <td class="num">15%</td>
+            <td class="num"><span class="pill pill-blocked">Blocked <span class="count">5</span></span></td>
+          </tr>
+          <tr>
+            <td class="project-name"><span class="project-dot" style="background:#4A4E8C;"></span>ReconAI</td>
+            <td>Launch readiness</td>
+            <td class="barcell"><div class="bar"><span class="fill-blocked" style="width:28%;"></span></div></td>
+            <td class="num">28%</td>
+            <td class="num"><span class="pill pill-blocked">Blocked <span class="count">10</span></span></td>
+          </tr>
+          <tr>
+            <td class="project-name"><span class="project-dot" style="background:#1E5D9E;"></span>Quotefront</td>
+            <td>Launch readiness</td>
+            <td class="barcell"><div class="bar"><span class="fill-blocked" style="width:37%;"></span></div></td>
+            <td class="num">37%</td>
+            <td class="num"><span class="pill pill-blocked">Blocked <span class="count">11</span></span></td>
+          </tr>
+          <tr>
+            <td class="project-name"><span class="project-dot" style="background:#2F6F62;"></span>Shipshape</td>
+            <td>Discovery</td>
+            <td class="barcell"><div class="bar"><span class="fill-blocked" style="width:44%;"></span></div></td>
+            <td class="num">44%</td>
+            <td class="num"><span class="pill pill-blocked">Blocked <span class="count">3</span></span></td>
+          </tr>
+          <tr>
+            <td class="project-name"><span class="project-dot" style="background:#2F6F62;"></span>Windward</td>
+            <td>Security baseline</td>
+            <td class="barcell"><div class="bar"><span class="fill-blocked" style="width:46%;"></span></div></td>
+            <td class="num">46%</td>
+            <td class="num"><span class="pill pill-blocked">Blocked <span class="count">5</span></span></td>
+          </tr>
+          <tr>
+            <td class="project-name"><span class="project-dot" style="background:#B4562A;"></span>ZipQuarry</td>
+            <td>Launch readiness</td>
+            <td class="barcell"><div class="bar"><span class="fill-blocked" style="width:57%;"></span></div></td>
+            <td class="num">57%</td>
+            <td class="num"><span class="pill pill-blocked">Blocked <span class="count">9</span></span></td>
+          </tr>
+          <tr>
+            <td class="project-name"><span class="project-dot" style="background:#1C1C1C;"></span>Northbound Studio</td>
+            <td>Launch readiness</td>
+            <td class="barcell"><div class="bar"><span class="fill-blocked" style="width:93%;"></span></div></td>
+            <td class="num">93%</td>
+            <td class="num"><span class="pill pill-blocked">Blocked <span class="count">1</span></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section>
+    <div class="notes">
+      <div class="panel note">
+        <h3>Settled</h3>
+        <ul>
+          <li>Single light ground. Quotefront owns the dark end of the Northbound range; Shipshape is read like a document, not watched like a monitor.</li>
+          <li>Sea-green is the only accent. One colour, everywhere an action lives.</li>
+          <li>The four signal colours never do brand duty.</li>
+          <li>Figures are always mono and tabular. This is an instrument.</li>
+        </ul>
+      </div>
+      <div class="panel note">
+        <h3>Still open</h3>
+        <ul>
+          <li>The wordmark is set type, not a drawn logo. It wants a proper mark before anything goes public.</li>
+          <li>Fraunces is doing display work at one weight — the soft and wonk axes are untested.</li>
+          <li>No iconography yet. Arrows on the board are text characters standing in.</li>
+          <li>Empty and error states exist in code but have not been designed with care.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Chart &amp; Rule — Shipshape, Northbound Studio. Tokens live in
+    <code>packages/ui/src/tokens.css</code>; this page is the same palette and type rendered by hand,
+    so it can be judged before the app builds.
+  </footer>
+
+</div>
+</body>
+</html>
