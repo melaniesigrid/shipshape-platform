@@ -35,6 +35,22 @@ Treat the following as written-but-unproven:
 **Start here on the next session**, in this order: install, typecheck, push,
 seed, dev. Fix forward from whatever breaks first.
 
+## Brand
+
+Live at <https://melaniesigrid.github.io/shipshape-brand/> (public repo,
+generated). The honest version, scored against the real portfolio, is
+`brand/index.html` in this repo.
+
+Open questions on the identity:
+
+- [ ] The wordmark is set type, not a drawn mark. Needs one before anything
+      goes public under the name.
+- [ ] `--color-sea` is `#2F6F62`, which is the *same hex* as Windward's project
+      colour in the seed. One of the two should move.
+- [ ] Fraunces is doing display work at a single weight; the soft and wonk axes
+      are untested.
+- [ ] No iconography. The board's move controls are text arrows standing in.
+
 ## Known gaps, deliberately left
 
 - **No self-serve signup.** Sign-in is invite-only — a token is only issued for

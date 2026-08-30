@@ -40,6 +40,18 @@ pnpm typecheck
 pnpm lint
 ```
 
+## Brand
+
+The Chart & Rule identity is at `brand/index.html` — a standalone page, no build
+step, so the design can be judged before the app installs. Open it directly.
+
+That page is scored against Northbound's **real** portfolio, which is why it is
+not the one on the public URL. `node brand/build-public.mjs` swaps the portfolio
+for illustrative data and refuses to write if any real project name survives;
+its output is published at
+<https://melaniesigrid.github.io/shipshape-brand/> from the public
+[shipshape-brand](https://github.com/melaniesigrid/shipshape-brand) repo.
+
 ## Architecture
 
 | Package | Role |
