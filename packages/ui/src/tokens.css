@@ -1,0 +1,120 @@
+/**
+ * Shipshape design tokens — "Chart & Rule".
+ *
+ * The reference is an admiralty chart and a drafting rule, not a SaaS
+ * dashboard. Warm paper ground, deep sea-green ink, hairline rules, and a
+ * single signal colour per readiness state. The product's job is to tell you
+ * plainly what is not ready, so the surface stays quiet and lets four status
+ * colours do all the shouting.
+ *
+ * Sibling products in the studio own the dark end of the range (Quotefront is
+ * asphalt and hi-vis). Shipshape is deliberately the light one: it is read for
+ * long stretches, like a document, not glanced at like a monitor.
+ */
+
+@theme {
+  /* Ground ------------------------------------------------------------- */
+  /* Warm off-whites. Never pure #fff — chart paper has age in it. */
+  --color-paper: #f6f4ef;
+  --color-card: #fffdf9;
+  --color-sunk: #eceae3;
+  --color-raised: #ffffff;
+
+  /* Ink ---------------------------------------------------------------- */
+  /* Green-black rather than grey-black, so it sits under the sea-green. */
+  --color-ink: #14211e;
+  --color-ink-soft: #47544f;
+  --color-ink-faint: #7c8783;
+  --color-hair: rgba(20, 33, 30, 0.1);
+  --color-hair-strong: rgba(20, 33, 30, 0.2);
+
+  /* Brand -------------------------------------------------------------- */
+  --color-sea: #2f6f62;
+  --color-sea-deep: #22544a;
+  --color-sea-soft: rgba(47, 111, 98, 0.1);
+
+  /*
+   * Readiness. Four states, four colours, used nowhere else in the interface.
+   * The moment one of these appears somewhere decorative it stops meaning
+   * anything, so they are reserved.
+   */
+  --color-blocked: #b4442e;
+  --color-blocked-soft: rgba(180, 68, 46, 0.12);
+  --color-at-risk: #b57a17;
+  --color-at-risk-soft: rgba(181, 122, 23, 0.14);
+  --color-on-track: #2f6f8f;
+  --color-on-track-soft: rgba(47, 111, 143, 0.12);
+  --color-ready: #2f7a4e;
+  --color-ready-soft: rgba(47, 122, 78, 0.12);
+
+  /* Criterion status. Quieter than readiness — these are row-level. */
+  --color-waived: #6d5b8f;
+  --color-waived-soft: rgba(109, 91, 143, 0.12);
+  --color-na: #8b938f;
+
+  /* Type ---------------------------------------------------------------- */
+  /* A chart-plate serif for headings and numbers, a plain grotesque for prose,
+     and a mono for criterion keys, which are identifiers and should read like
+     identifiers. */
+  --font-display: "Fraunces Variable", "Fraunces", ui-serif, Georgia, serif;
+  --font-body: "Hanken Grotesk Variable", "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+
+  /* Shape --------------------------------------------------------------- */
+  --radius-card: 6px;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 1px 2px rgba(20, 33, 30, 0.05), 0 8px 24px rgba(20, 33, 30, 0.04);
+  --shadow-lift: 0 2px 4px rgba(20, 33, 30, 0.07), 0 16px 40px rgba(20, 33, 30, 0.1);
+  --shadow-drag: 0 12px 32px rgba(20, 33, 30, 0.18);
+}
+
+/* --------------------------------------------------------------------- */
+/* Base                                                                    */
+/* --------------------------------------------------------------------- */
+
+@layer base {
+  html {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /*
+   * The faint chart rule behind everything. Two 1px gradients at 32px, at 3%
+   * opacity — present enough to give the page a measured feel, faint enough
+   * that nobody consciously sees it.
+   */
+  body {
+    background-image:
+      linear-gradient(to right, rgba(20, 33, 30, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(20, 33, 30, 0.03) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 550;
+    letter-spacing: -0.01em;
+  }
+
+  /* Visible focus everywhere. A board is driven from the keyboard as much as
+     the mouse, and an invisible focus ring makes that impossible. */
+  :focus-visible {
+    outline: 2px solid var(--color-sea);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

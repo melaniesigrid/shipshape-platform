@@ -125,6 +125,29 @@ export const sessions = pgTable(
   (table) => [index("sessions_user_idx").on(table.userId)],
 );
 
+/**
+ * Single-use magic-link tokens.
+ *
+ * Only the SHA-256 hash is stored. A leaked database backup then yields no
+ * usable login link, which is the entire reason not to store the token itself.
+ */
+export const loginTokens = pgTable(
+  "login_tokens",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    email: text("email").notNull(),
+    tokenHash: text("token_hash").notNull(),
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+    /** Set on first use. A second attempt with the same link is rejected. */
+    consumedAt: timestamp("consumed_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("login_tokens_hash_idx").on(table.tokenHash),
+    index("login_tokens_email_idx").on(table.email),
+  ],
+);
+
 // ---------------------------------------------------------------------------
 // Projects
 // ---------------------------------------------------------------------------
@@ -471,6 +494,7 @@ export type Tenant = typeof tenants.$inferSelect;
 export type User = typeof users.$inferSelect;
 export type Membership = typeof memberships.$inferSelect;
 export type Session = typeof sessions.$inferSelect;
+export type LoginToken = typeof loginTokens.$inferSelect;
 export type Project = typeof projects.$inferSelect;
 export type NewProject = typeof projects.$inferInsert;
 export type RubricRow = typeof rubrics.$inferSelect;

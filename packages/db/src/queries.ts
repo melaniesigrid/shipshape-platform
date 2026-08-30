@@ -13,11 +13,9 @@ import { and, asc, desc, eq, inArray, isNull, sql } from "drizzle-orm";
 import {
   DEFAULT_COLUMNS,
   generateCardsForGaps,
-  groupByColumn,
   moveCard,
   portfolioRollup,
   scoreRubric,
-  suggestAll,
   validateAssessment,
   type Assessment,
   type Board,
@@ -188,6 +186,36 @@ export async function listProjectsWithScores(
       .filter((row) => row.projectId === project.id)
       .map(({ projectId: _projectId, ...rest }) => rest),
   }));
+}
+
+/** Every rubric applied to one project, with its cached score. */
+export async function listProjectRubrics(db: Database, tenantId: string, projectId: string) {
+  return db
+    .select({
+      projectRubricId: projectRubrics.id,
+      rubricId: rubrics.id,
+      rubricKey: rubrics.key,
+      rubricName: rubrics.name,
+      version: rubrics.version,
+      passThreshold: rubrics.passThreshold,
+      percentBp: projectRubrics.cachedPercentBp,
+      readiness: projectRubrics.cachedReadiness,
+      blockingCount: projectRubrics.cachedBlockingCount,
+    })
+    .from(projectRubrics)
+    .innerJoin(rubrics, eq(rubrics.id, projectRubrics.rubricId))
+    .where(and(eq(projectRubrics.tenantId, tenantId), eq(projectRubrics.projectId, projectId)))
+    .orderBy(asc(rubrics.name));
+}
+
+/** A project's board, if it has one. Projects get one at creation. */
+export async function getBoardForProject(db: Database, tenantId: string, projectId: string) {
+  const [row] = await db
+    .select()
+    .from(boards)
+    .where(and(eq(boards.tenantId, tenantId), eq(boards.projectId, projectId)))
+    .limit(1);
+  return row;
 }
 
 // ---------------------------------------------------------------------------
@@ -651,8 +679,6 @@ export async function loadBoard(
     ),
   };
 }
-
-export { groupByColumn, suggestAll };
 
 /**
  * Persist a drag. One row written, whatever the board's size.

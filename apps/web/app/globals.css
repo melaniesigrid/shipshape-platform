@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+/*
+ * Tokens live in @shipshape/ui so the design system is one file, shared. The
+ * @source line is what makes Tailwind scan that package for utility classes —
+ * without it every class used only inside a UI primitive is silently dropped
+ * from the build, and the components render unstyled.
+ */
+@import "@shipshape/ui/tokens.css";
+@source "../../../packages/ui/src";
+
+@import "@fontsource-variable/fraunces";
+@import "@fontsource-variable/hanken-grotesk";
+@import "@fontsource-variable/jetbrains-mono";
