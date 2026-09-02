@@ -1,0 +1,761 @@
+<title>Shipshape at a Glance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+  /* Chart & Rule — the product's own palette. Hairline rules do the
+     structural work, and the readiness bands are the only other colour. */
+  :root {
+    --ground:     #f6f4ef;
+    --card:       #fffdf9;
+    --sunk:       #eceae3;
+    --ink:        #14211e;
+    --ink-soft:   #47544f;
+    --ink-faint:  #626c68;
+    --rule:       #d5d2ca;
+    --rule-firm:  #bbb9b2;
+
+    --sea:        #2b6559;
+    --sea-wash:   #e2ece9;
+
+    --blocked:    #a83f2a;
+    --at-risk:    #7d5410;
+    --on-track:   #2b627f;
+    --ready:      #2a6f47;
+    --waived:     #5f5280;
+
+    --f-head: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+    --f-body: 'Hanken Grotesk', -apple-system, 'Segoe UI', Arial, sans-serif;
+    --f-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:     #0f1614;
+      --card:       #17201d;
+      --sunk:       #131a18;
+      --ink:        #e8eeeb;
+      --ink-soft:   #a5b2ad;
+      --ink-faint:  #7d8a85;
+      --rule:       #26332f;
+      --rule-firm:  #35443f;
+
+      --sea:        #64bda9;
+      --sea-wash:   #14302a;
+
+      --blocked:    #e8836a;
+      --at-risk:    #d6a44a;
+      --on-track:   #6aacd0;
+      --ready:      #5fb684;
+      --waived:     #a294c9;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground:     #0f1614;
+    --card:       #17201d;
+    --sunk:       #131a18;
+    --ink:        #e8eeeb;
+    --ink-soft:   #a5b2ad;
+    --ink-faint:  #7d8a85;
+    --rule:       #26332f;
+    --rule-firm:  #35443f;
+
+    --sea:        #64bda9;
+    --sea-wash:   #14302a;
+
+    --blocked:    #e8836a;
+    --at-risk:    #d6a44a;
+    --on-track:   #6aacd0;
+    --ready:      #5fb684;
+    --waived:     #a294c9;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: clamp(1.75rem, 5vw, 3.5rem) clamp(1.1rem, 4vw, 2.5rem) 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.75rem;
+  }
+
+  :focus-visible { outline: 3px solid var(--sea); outline-offset: 2px; border-radius: 2px; }
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-bottom: 1.75rem;
+    border-bottom: 2px solid var(--sea);
+  }
+
+  h1 {
+    font-family: var(--f-head);
+    font-weight: 700;
+    font-size: clamp(2.25rem, 6.5vw, 3.25rem);
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .tagline { margin: 0; font-size: clamp(1.0625rem, 2.6vw, 1.25rem); line-height: 1.5; color: var(--ink-soft); max-width: 40rem; }
+  .tagline b { color: var(--ink); font-weight: 600; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .chip {
+    font-family: var(--f-mono);
+    font-size: 0.75rem;
+    padding: 0.32rem 0.7rem;
+    border-radius: 2px;
+    background: var(--sea-wash);
+    color: var(--sea);
+    font-weight: 500;
+  }
+  .chip--solid { background: var(--card); border: 1px solid var(--rule-firm); color: var(--ink-soft); }
+
+  section { display: flex; flex-direction: column; gap: 1.15rem; }
+
+  /* The rule in Chart & Rule: every heading runs a hairline to the margin. */
+  h2 {
+    font-family: var(--f-head);
+    font-weight: 600;
+    font-size: 1.4375rem;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--ink);
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+  }
+  h2::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  p { margin: 0; max-width: 42rem; }
+  .plain { font-size: 1.0625rem; line-height: 1.65; color: var(--ink-soft); }
+  .plain b { color: var(--ink); font-weight: 600; }
+
+  /* Try it */
+  .tryit {
+    background: var(--card);
+    border: 1px solid var(--rule-firm);
+    border-left: 4px solid var(--sea);
+    border-radius: 2px;
+    padding: 1.4rem 1.4rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+  .tryit h2 { font-size: 1.25rem; }
+
+  .links { display: flex; flex-direction: column; gap: 0.7rem; margin: 0; }
+  .linkrow { display: grid; grid-template-columns: 7.5rem 1fr; gap: 0.25rem 1rem; align-items: baseline; }
+  .linkrow dt { font-family: var(--f-mono); font-size: 0.6875rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--ink-faint); }
+  .linkrow dd { margin: 0; }
+  .linkrow a { font-family: var(--f-mono); font-size: 0.9375rem; color: var(--sea); font-weight: 500; overflow-wrap: anywhere; }
+  .linkrow span { font-size: 0.9375rem; color: var(--ink-soft); }
+
+  .steps-login { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; counter-reset: li; }
+  .steps-login li {
+    display: grid;
+    grid-template-columns: 1.6rem 1fr;
+    gap: 0.8rem;
+    align-items: baseline;
+    font-size: 0.9688rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+  .steps-login li::before {
+    counter-increment: li;
+    content: counter(li);
+    font-family: var(--f-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--sea);
+    background: var(--sea-wash);
+    border-radius: 2px;
+    text-align: center;
+    padding: 0.1rem 0;
+  }
+  .steps-login b { color: var(--ink); font-weight: 600; }
+  .steps-login code {
+    font-family: var(--f-mono);
+    font-size: 0.8438rem;
+    background: var(--sunk);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 0.05rem 0.35rem;
+  }
+
+  .note { font-size: 0.875rem; color: var(--ink-faint); line-height: 1.5; border-top: 1px solid var(--rule); padding-top: 0.9rem; max-width: none; }
+
+  /* Steps */
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 1rem; }
+  .step {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 1.25rem 1.2rem 1.35rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .step svg { display: block; }
+  .step h3 { font-family: var(--f-head); font-size: 1.0625rem; font-weight: 600; margin: 0; }
+  .step p { font-size: 0.9375rem; color: var(--ink-soft); line-height: 1.55; }
+
+  /* Diagrams */
+  .diagram {
+    background: var(--card);
+    border: 1px solid var(--rule-firm);
+    border-radius: 2px;
+    padding: 1.5rem 1.25rem 1.25rem;
+    margin: 0;
+    overflow-x: auto;
+  }
+  .diagram svg { display: block; margin: 0 auto; min-width: 34rem; max-width: 100%; height: auto; }
+  .diagram figcaption {
+    margin-top: 1rem;
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
+    text-align: center;
+    max-width: 42rem;
+    margin-inline: auto;
+    line-height: 1.55;
+  }
+  .diagram figcaption b { color: var(--ink); font-weight: 600; }
+
+  /* Bands table */
+  .bands { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--rule-firm); border-radius: 2px; overflow: hidden; }
+  .band {
+    display: grid;
+    grid-template-columns: 0.4rem 8rem 1fr;
+    gap: 0 1rem;
+    align-items: baseline;
+    padding: 0.75rem 1rem 0.75rem 0;
+    background: var(--card);
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
+  }
+  .band:last-child { border-bottom: 0; }
+  .band i { display: block; align-self: stretch; }
+  .band b { font-family: var(--f-mono); font-size: 0.8125rem; font-weight: 500; color: var(--ink); }
+
+  /* Languages */
+  .langs { display: flex; flex-direction: column; gap: 1.1rem; }
+  .lang { display: grid; grid-template-columns: 12rem 1fr 3.5rem; gap: 0.4rem 1rem; align-items: center; }
+  .lang__name { font-family: var(--f-head); font-size: 1rem; font-weight: 600; }
+  .lang__name span { display: block; font-family: var(--f-mono); font-size: 0.6875rem; font-weight: 400; color: var(--ink-faint); margin-top: 0.1rem; }
+  .lang__track { height: 14px; background: var(--sunk); border: 1px solid var(--rule); border-radius: 1px; overflow: hidden; }
+  .lang__fill { display: block; height: 100%; }
+  .lang__pct { font-family: var(--f-mono); font-size: 0.875rem; font-weight: 500; text-align: right; font-variant-numeric: tabular-nums; }
+
+  /* Stack */
+  .stack { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; }
+  .group { background: var(--card); border: 1px solid var(--rule); border-radius: 2px; padding: 1.1rem 1.15rem 1.25rem; }
+  .group h3 {
+    font-family: var(--f-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 0.75rem;
+  }
+  .group ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .group li {
+    font-family: var(--f-mono);
+    font-size: 0.75rem;
+    padding: 0.28rem 0.6rem;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    background: var(--sunk);
+    color: var(--ink-soft);
+  }
+  .group li.hi { background: var(--sea-wash); border-color: var(--sea); color: var(--sea); font-weight: 500; }
+
+  /* Stats */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: 1rem; }
+  .stat { background: var(--card); border: 1px solid var(--rule); border-top: 3px solid var(--sea); border-radius: 2px; padding: 1.05rem 1rem 1.1rem; }
+  .stat b {
+    display: block;
+    font-family: var(--f-head);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat span { display: block; margin-top: 0.4rem; font-size: 0.8125rem; color: var(--ink-soft); line-height: 1.35; }
+
+  /* Did */
+  .did { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+  .did li {
+    display: grid;
+    grid-template-columns: 1.5rem 1fr;
+    gap: 0.85rem;
+    align-items: start;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 1rem 1.15rem;
+    font-size: 0.9688rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .did b { color: var(--ink); font-weight: 600; }
+  .tick { color: var(--sea); margin-top: 0.15rem; }
+
+  .keywords { background: var(--sunk); border: 1px solid var(--rule); border-radius: 2px; padding: 1.15rem 1.25rem; }
+  .keywords h3 {
+    font-family: var(--f-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 0.6rem;
+    font-weight: 500;
+  }
+  .keywords p { font-family: var(--f-mono); font-size: 0.8125rem; line-height: 1.85; color: var(--ink-soft); max-width: none; }
+
+  footer { font-family: var(--f-mono); font-size: 0.75rem; color: var(--ink-faint); padding-top: 1.25rem; border-top: 1px solid var(--rule); }
+
+  @media (max-width: 34rem) {
+    .lang { grid-template-columns: 1fr 3.5rem; }
+    .lang__track { grid-column: 1 / -1; order: 3; }
+    .linkrow { grid-template-columns: 1fr; }
+    .band { grid-template-columns: 0.4rem 1fr; }
+  }
+</style>
+
+<div class="page">
+
+  <header class="hero">
+    <h1>Shipshape</h1>
+    <p class="tagline">
+      Most project tools track <b>what you are doing</b>. Shipshape also tracks
+      <b>what "done" is supposed to mean</b> — written once, applied to every project you own — and
+      turns whatever falls short into cards on that project's board.
+    </p>
+    <div class="chips">
+      <span class="chip">TypeScript</span>
+      <span class="chip">Next.js</span>
+      <span class="chip">PostgreSQL</span>
+      <span class="chip">Drizzle ORM</span>
+      <span class="chip">Monorepo</span>
+      <span class="chip">Multi-tenant</span>
+      <span class="chip chip--solid">49 tests passing</span>
+      <span class="chip chip--solid">Not yet deployed</span>
+    </div>
+  </header>
+
+  <section class="tryit">
+    <h2>See it yourself</h2>
+    <dl class="links">
+      <div class="linkrow">
+        <dt>Brand page</dt>
+        <dd><a href="https://melaniesigrid.github.io/shipshape-brand/">melaniesigrid.github.io/shipshape-brand</a> <span>— live, open to anyone</span></dd>
+      </div>
+      <div class="linkrow">
+        <dt>Source</dt>
+        <dd><a href="https://github.com/melaniesigrid/shipshape-platform">github.com/melaniesigrid/shipshape-platform</a></dd>
+      </div>
+      <div class="linkrow">
+        <dt>The app</dt>
+        <dd><span>Not deployed yet. The domain logic is finished and its 49 tests pass; the web app runs locally.</span></dd>
+      </div>
+    </dl>
+
+    <h2>How to run and sign in</h2>
+    <ol class="steps-login">
+      <li>The <b>brand page above needs nothing</b> — it is a standalone page with no build step, so the design can be judged before any of the software is installed.</li>
+      <li>To run the app: <code>pnpm install</code>, then <code>pnpm db:push</code> to create the schema and <code>pnpm db:seed</code> to load the built-in standards and a demo portfolio.</li>
+      <li><code>pnpm dev</code>, then open <code>localhost:3000</code> and enter the email address the seed created.</li>
+      <li>There is <b>no password</b>. The app emails you a one-time sign-in link — and with no mail provider configured it <b>prints the link to the terminal instead</b>, so local development works with nothing to set up.</li>
+      <li>Sign-in is <b>invite-only by design</b>: a link is only ever issued to an address that already has an account, so the form cannot be used to create one.</li>
+      <li>Want just the domain logic? <code>pnpm test</code> runs all 49 tests with <b>no install at all</b> — the core package has zero dependencies.</li>
+    </ol>
+    <p class="note">
+      That last point is deliberate. The scoring rules are the part worth reviewing, so they were
+      built to be reviewable in isolation — no database, no environment, no server.
+    </p>
+  </section>
+
+  <section>
+    <h2>The question it answers</h2>
+    <p class="plain">
+      Not "how is this project doing". The question is
+      <b>"which of the eight things we own still cannot take a payment"</b> — and answering that
+      needs one standard held across a whole portfolio, not eight separate opinions.
+    </p>
+    <div class="steps">
+
+      <div class="step">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <rect x="7" y="5" width="26" height="30" rx="2" stroke="var(--sea)" stroke-width="2"/>
+          <line x1="12" y1="13" x2="28" y2="13" stroke="var(--ink-faint)" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="12" y1="20" x2="28" y2="20" stroke="var(--ink-faint)" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="12" y1="27" x2="22" y2="27" stroke="var(--ink-faint)" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <h3>1. Write the standard once</h3>
+        <p>A list of things that must be true before something is ready — each with a weight, and guidance saying what "met" actually looks like.</p>
+      </div>
+
+      <div class="step">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <rect x="4" y="8" width="9" height="24" rx="1.5" stroke="var(--ink-faint)" stroke-width="2"/>
+          <rect x="15.5" y="8" width="9" height="24" rx="1.5" stroke="var(--ink-faint)" stroke-width="2"/>
+          <rect x="27" y="8" width="9" height="24" rx="1.5" stroke="var(--ink-faint)" stroke-width="2"/>
+          <line x1="6.5" y1="14" x2="10.5" y2="14" stroke="var(--sea)" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="18" y1="14" x2="22" y2="14" stroke="var(--sea)" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="29.5" y1="14" x2="33.5" y2="14" stroke="var(--sea)" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+        <h3>2. Apply it to everything</h3>
+        <p>Every project gets scored against the same list, so the answers can be lined up next to each other and actually compared.</p>
+      </div>
+
+      <div class="step">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <rect x="5" y="9" width="14" height="10" rx="2" stroke="var(--blocked)" stroke-width="2"/>
+          <rect x="5" y="23" width="14" height="9" rx="2" stroke="var(--ink-faint)" stroke-width="2"/>
+          <rect x="23" y="9" width="12" height="9" rx="2" stroke="var(--ink-faint)" stroke-width="2"/>
+          <path d="M20 14 H23" stroke="var(--sea)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M27 26 L30 29 L35 22" stroke="var(--ready)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3>3. The gaps become work</h3>
+        <p>Each thing that isn't met turns into a card on that project's board, carrying the guidance as its acceptance criteria.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>How a standard becomes work</h2>
+    <figure class="diagram">
+      <svg viewBox="0 0 660 300" width="100%" role="img" aria-label="Diagram: a rubric of criteria is applied to each project, producing one assessment per criterion; every criterion that is not met generates a card on that project's board, and the card keeps a link back to the criterion so closing it updates the score.">
+        <defs>
+          <marker id="ss-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-faint)"/>
+          </marker>
+          <marker id="ss-arrow-s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--sea)"/>
+          </marker>
+        </defs>
+
+        <!-- rubric -->
+        <rect x="14" y="70" width="140" height="92" rx="2" fill="var(--sea-wash)" stroke="var(--sea)" stroke-width="2.5"/>
+        <text x="84" y="96" text-anchor="middle" font-family="Fraunces, serif" font-size="14" font-weight="600" fill="var(--ink)">The standard</text>
+        <text x="84" y="115" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="var(--ink-faint)">weighted criteria</text>
+        <text x="84" y="131" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="10" fill="var(--ink-faint)">each with guidance:</text>
+        <text x="84" y="146" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="10" fill="var(--ink-faint)">what "met" looks like</text>
+
+        <line x1="158" y1="116" x2="196" y2="116" stroke="var(--sea)" stroke-width="2" marker-end="url(#ss-arrow-s)"/>
+        <text x="177" y="108" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--sea)">applied to</text>
+
+        <!-- projects -->
+        <rect x="200" y="46" width="128" height="34" rx="2" fill="var(--card)" stroke="var(--ink-faint)" stroke-width="1.6"/>
+        <text x="264" y="68" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="11.5" fill="var(--ink)">Project A</text>
+        <rect x="200" y="90" width="128" height="34" rx="2" fill="var(--card)" stroke="var(--ink)" stroke-width="2"/>
+        <text x="264" y="112" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="11.5" font-weight="600" fill="var(--ink)">Project B</text>
+        <rect x="200" y="134" width="128" height="34" rx="2" fill="var(--card)" stroke="var(--ink-faint)" stroke-width="1.6"/>
+        <text x="264" y="156" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="11.5" fill="var(--ink)">Project C</text>
+        <text x="264" y="188" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-faint)">…eight of them</text>
+
+        <!-- assessments -->
+        <line x1="332" y1="107" x2="368" y2="107" stroke="var(--ink-faint)" stroke-width="1.8" marker-end="url(#ss-arrow)"/>
+        <rect x="372" y="72" width="140" height="70" rx="2" fill="var(--card)" stroke="var(--ink-faint)" stroke-width="1.8"/>
+        <text x="442" y="96" text-anchor="middle" font-family="Fraunces, serif" font-size="13" font-weight="600" fill="var(--ink)">One verdict</text>
+        <text x="442" y="112" text-anchor="middle" font-family="Fraunces, serif" font-size="13" font-weight="600" fill="var(--ink)">per criterion</text>
+        <text x="442" y="130" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-faint)">met · partial · not met · waived</text>
+
+        <!-- score -->
+        <line x1="516" y1="94" x2="552" y2="72" stroke="var(--ink-faint)" stroke-width="1.8" marker-end="url(#ss-arrow)"/>
+        <rect x="556" y="40" width="92" height="46" rx="2" fill="var(--card)" stroke="var(--sea)" stroke-width="2"/>
+        <text x="602" y="62" text-anchor="middle" font-family="Fraunces, serif" font-size="16" font-weight="700" fill="var(--ink)">57%</text>
+        <text x="602" y="77" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8.5" fill="var(--ink-faint)">the score</text>
+
+        <!-- cards -->
+        <line x1="442" y1="146" x2="442" y2="186" stroke="var(--blocked)" stroke-width="2" marker-end="url(#ss-arrow)"/>
+        <text x="450" y="170" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--blocked)">not met →</text>
+        <rect x="358" y="190" width="170" height="62" rx="2" fill="var(--card)" stroke="var(--blocked)" stroke-width="2"/>
+        <text x="443" y="214" text-anchor="middle" font-family="Fraunces, serif" font-size="13" font-weight="600" fill="var(--ink)">A card on the board</text>
+        <text x="443" y="232" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="10" fill="var(--ink-faint)">carrying the criterion's guidance</text>
+        <text x="443" y="246" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="10" fill="var(--ink-faint)">as its acceptance criteria</text>
+
+        <!-- the loop back -->
+        <path d="M358 221 H150 V162" fill="none" stroke="var(--sea)" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ss-arrow-s)"/>
+        <text x="250" y="273" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="var(--sea)">the card remembers which criterion it exists to satisfy</text>
+      </svg>
+      <figcaption>
+        The dashed line back is the part that matters. A card knows <b>which criterion it exists to
+        satisfy</b>, so finishing the work updates the score rather than leaving it to somebody to
+        remember. Without that one link, the standard decays into a document nobody opens.
+      </figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>What the database remembers</h2>
+    <figure class="diagram">
+      <svg viewBox="0 0 660 330" width="100%" role="img" aria-label="Entity diagram: tenants own users through memberships, projects, rubrics and boards. Rubrics hold criteria; applying a rubric to a project creates assessments; boards hold columns and cards, and a card can point back at the criterion it satisfies.">
+        <defs>
+          <marker id="ss-erd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--ink-faint)"/>
+          </marker>
+          <marker id="ss-erd-s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--sea)"/>
+          </marker>
+        </defs>
+
+        <!-- tenants -->
+        <rect x="256" y="12" width="148" height="46" rx="2" fill="var(--sea-wash)" stroke="var(--sea)" stroke-width="2.5"/>
+        <text x="330" y="33" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" font-weight="500" fill="var(--ink)">tenants</text>
+        <text x="330" y="49" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="10" fill="var(--ink-faint)">one company's whole world</text>
+
+        <line x1="278" y1="62" x2="90" y2="98" stroke="var(--sea)" stroke-width="1.6" marker-end="url(#ss-erd-s)"/>
+        <line x1="310" y1="62" x2="250" y2="98" stroke="var(--sea)" stroke-width="1.6" marker-end="url(#ss-erd-s)"/>
+        <line x1="350" y1="62" x2="410" y2="98" stroke="var(--sea)" stroke-width="1.6" marker-end="url(#ss-erd-s)"/>
+        <line x1="382" y1="62" x2="570" y2="98" stroke="var(--sea)" stroke-width="1.6" marker-end="url(#ss-erd-s)"/>
+
+        <!-- users -->
+        <rect x="14" y="102" width="146" height="46" rx="2" fill="var(--card)" stroke="var(--ink-faint)" stroke-width="1.6"/>
+        <text x="87" y="123" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" fill="var(--ink)">users · memberships</text>
+        <text x="87" y="139" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="10" fill="var(--ink-faint)">who may see it</text>
+        <rect x="14" y="158" width="146" height="42" rx="2" fill="var(--card)" stroke="var(--ink-faint)" stroke-width="1.4"/>
+        <text x="87" y="177" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" fill="var(--ink)">login_tokens · sessions</text>
+        <text x="87" y="192" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="9.5" fill="var(--ink-faint)">no password column</text>
+        <line x1="87" y1="152" x2="87" y2="154" stroke="var(--ink-faint)" stroke-width="1.4"/>
+
+        <!-- rubrics -->
+        <rect x="184" y="102" width="132" height="46" rx="2" fill="var(--card)" stroke="var(--ink-faint)" stroke-width="1.6"/>
+        <text x="250" y="123" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="500" fill="var(--ink)">rubrics</text>
+        <text x="250" y="139" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="10" fill="var(--ink-faint)">a versioned standard</text>
+
+        <line x1="250" y1="152" x2="250" y2="176" stroke="var(--ink-faint)" stroke-width="1.6" marker-end="url(#ss-erd)"/>
+        <text x="258" y="169" font-family="JetBrains Mono, monospace" font-size="8.5" fill="var(--ink-faint)">1:N</text>
+        <rect x="176" y="180" width="148" height="46" rx="2" fill="var(--card)" stroke="var(--sea)" stroke-width="2"/>
+        <text x="250" y="201" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" fill="var(--ink)">rubric_criteria</text>
+        <text x="250" y="217" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="10" fill="var(--ink-faint)">weight · required · guidance</text>
+
+        <!-- projects -->
+        <rect x="344" y="102" width="132" height="46" rx="2" fill="var(--card)" stroke="var(--ink-faint)" stroke-width="1.6"/>
+        <text x="410" y="123" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="500" fill="var(--ink)">projects</text>
+        <text x="410" y="139" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="10" fill="var(--ink-faint)">one thing you own</text>
+
+        <!-- project_rubrics + assessments -->
+        <line x1="410" y1="152" x2="410" y2="176" stroke="var(--ink-faint)" stroke-width="1.6" marker-end="url(#ss-erd)"/>
+        <line x1="324" y1="203" x2="352" y2="196" stroke="var(--ink-faint)" stroke-width="1.6" marker-end="url(#ss-erd)"/>
+        <rect x="352" y="180" width="150" height="46" rx="2" fill="var(--card)" stroke="var(--ink-faint)" stroke-width="1.6"/>
+        <text x="427" y="201" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="500" fill="var(--ink)">project_rubrics</text>
+        <text x="427" y="217" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="10" fill="var(--ink-faint)">this standard, on this project</text>
+
+        <line x1="427" y1="230" x2="427" y2="252" stroke="var(--ink-faint)" stroke-width="1.6" marker-end="url(#ss-erd)"/>
+        <rect x="352" y="256" width="150" height="46" rx="2" fill="var(--card)" stroke="var(--ink-faint)" stroke-width="1.6"/>
+        <text x="427" y="277" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" fill="var(--ink)">assessments</text>
+        <text x="427" y="293" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="10" fill="var(--ink-faint)">one verdict per criterion</text>
+
+        <!-- boards + cards -->
+        <rect x="516" y="102" width="132" height="46" rx="2" fill="var(--card)" stroke="var(--ink-faint)" stroke-width="1.6"/>
+        <text x="582" y="123" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" fill="var(--ink)">boards · columns</text>
+        <text x="582" y="139" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="10" fill="var(--ink-faint)">with WIP limits</text>
+
+        <line x1="582" y1="152" x2="582" y2="176" stroke="var(--ink-faint)" stroke-width="1.6" marker-end="url(#ss-erd)"/>
+        <rect x="516" y="180" width="132" height="46" rx="2" fill="var(--sea-wash)" stroke="var(--sea)" stroke-width="2.5"/>
+        <text x="582" y="201" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="500" fill="var(--ink)">cards</text>
+        <text x="582" y="217" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="10" fill="var(--ink-faint)">the actual work</text>
+
+        <!-- THE join -->
+        <path d="M516 196 H330 V230" fill="none" stroke="var(--sea)" stroke-width="2.2" stroke-dasharray="5 4" marker-end="url(#ss-erd-s)"/>
+        <text x="410" y="248" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" font-weight="500" fill="var(--sea)">cards.criterion_id</text>
+      </svg>
+      <figcaption>
+        Fourteen tables, and one of them earns its place more than the rest: the dashed link is
+        <b>a single nullable foreign key from a card back to the criterion it satisfies.</b> That one
+        column is the difference between a kanban board that happens to sit next to a checklist and a
+        board that keeps the checklist honest.
+      </figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>How a project is graded</h2>
+    <div class="bands">
+      <div class="band"><i style="background:var(--ready)"></i><b>Ready</b><span>Everything required is met, and the weighted score clears the bar.</span></div>
+      <div class="band"><i style="background:var(--on-track)"></i><b>On track</b><span>Scoring well, with nothing required outstanding.</span></div>
+      <div class="band"><i style="background:var(--at-risk)"></i><b>At risk</b><span>Enough gaps that the date is no longer safe.</span></div>
+      <div class="band"><i style="background:var(--blocked)"></i><b>Blocked</b><span>Something marked <em>required</em> is not met. No score can rescue this.</span></div>
+      <div class="band"><i style="background:var(--waived)"></i><b>Waived</b><span>Deliberately excused, with a reason recorded — not silently skipped.</span></div>
+    </div>
+    <p class="plain">
+      All the arithmetic is done in <b>whole numbers</b> — weights in points, credit in
+      hundredths of a percent — so the same portfolio never shows two slightly different
+      percentages depending on which screen you are looking at.
+    </p>
+  </section>
+
+  <section>
+    <h2>Languages used</h2>
+    <div class="langs">
+
+      <div class="lang">
+        <div class="lang__name">TypeScript <span>domain, data layer, design tokens</span></div>
+        <div class="lang__track"><span class="lang__fill" style="width:67%;background:var(--sea)"></span></div>
+        <div class="lang__pct" style="color:var(--sea)">67%</div>
+      </div>
+
+      <div class="lang">
+        <div class="lang__name">TSX <span>Next.js · the four screens</span></div>
+        <div class="lang__track"><span class="lang__fill" style="width:17%;background:var(--on-track)"></span></div>
+        <div class="lang__pct" style="color:var(--on-track)">17%</div>
+      </div>
+
+      <div class="lang">
+        <div class="lang__name">JavaScript <span>build and brand scripts</span></div>
+        <div class="lang__track"><span class="lang__fill" style="width:12%;background:var(--at-risk)"></span></div>
+        <div class="lang__pct" style="color:var(--at-risk)">12%</div>
+      </div>
+
+      <div class="lang">
+        <div class="lang__name">CSS <span>generated theme tokens</span></div>
+        <div class="lang__track"><span class="lang__fill" style="width:4%;background:var(--waived)"></span></div>
+        <div class="lang__pct" style="color:var(--waived)">4%</div>
+      </div>
+
+    </div>
+    <p class="plain">
+      About <b>10,600 lines</b> of code across four packages, plus a standalone brand page. The
+      largest share sits in the domain package — <b>which has no database, no environment and no
+      network in it at all</b>, and is the reason 49 tests can run in under a second with nothing
+      installed.
+    </p>
+  </section>
+
+  <section>
+    <h2>Technologies</h2>
+    <div class="stack">
+
+      <div class="group">
+        <h3>Domain</h3>
+        <ul>
+          <li class="hi">TypeScript</li><li class="hi">Pure functions</li><li>Integer arithmetic</li>
+          <li>Weighted scoring</li><li>Validation</li><li>node:test</li>
+        </ul>
+      </div>
+
+      <div class="group">
+        <h3>Data</h3>
+        <ul>
+          <li class="hi">PostgreSQL</li><li class="hi">Drizzle ORM</li><li>Neon</li>
+          <li>Multi-tenant isolation</li><li>Schema design</li><li>Transactions</li>
+        </ul>
+      </div>
+
+      <div class="group">
+        <h3>Web</h3>
+        <ul>
+          <li class="hi">Next.js</li><li>App Router</li><li>React</li>
+          <li>Passwordless auth</li><li>Server-side sessions</li>
+        </ul>
+      </div>
+
+      <div class="group">
+        <h3>Design system</h3>
+        <ul>
+          <li class="hi">Design tokens</li><li>Generated themes</li><li>Colour maths</li>
+          <li>Light and dark</li><li>Presentational primitives</li>
+        </ul>
+      </div>
+
+      <div class="group">
+        <h3>Tooling</h3>
+        <ul>
+          <li class="hi">pnpm workspaces</li><li>Turborepo</li><li>Node 22</li>
+          <li>ESLint</li><li>Git</li><li>GitHub Pages</li>
+        </ul>
+      </div>
+
+      <div class="group">
+        <h3>Practices</h3>
+        <ul>
+          <li>Monorepo</li><li>Domain-driven design</li><li>Test-first domain</li>
+          <li>Portfolio management</li><li>Readiness rubrics</li><li>Kanban · WIP limits</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>By the numbers</h2>
+    <div class="stats">
+      <div class="stat"><b>49</b><span>Domain tests, all passing</span></div>
+      <div class="stat"><b>14</b><span>Database tables</span></div>
+      <div class="stat"><b>4</b><span>Packages in the monorepo</span></div>
+      <div class="stat"><b>8</b><span>Projects in the demo portfolio</span></div>
+      <div class="stat"><b>10.6k</b><span>Lines of code</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What I built</h2>
+    <ul class="did">
+      <li>
+        <svg class="tick" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5 L7 13.5 L15 4.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span><b>The domain, the schema, the app and the design system</b> — four packages in one repository, written from an empty directory.</span>
+      </li>
+      <li>
+        <svg class="tick" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5 L7 13.5 L15 4.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span><b>Made the scoring reviewable on its own.</b> The rules live in a package with zero dependencies and zero I/O, so all 49 tests run with nothing installed — which is what let the hard part be finished and verified before the database existed.</span>
+      </li>
+      <li>
+        <svg class="tick" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5 L7 13.5 L15 4.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span><b>Refused to let a criterion exist without guidance.</b> If you cannot write down what "met" looks like, it is not ready to be scored — so guidance is a required field, not an optional note.</span>
+      </li>
+      <li>
+        <svg class="tick" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5 L7 13.5 L15 4.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span><b>Kept the public brand page honest without leaking.</b> The real portfolio page is scored against real projects; a build script swaps in illustrative data and <em>refuses to write the file</em> if any real project name survives.</span>
+      </li>
+      <li>
+        <svg class="tick" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5 L7 13.5 L15 4.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span><b>Left signup out on purpose.</b> Sign-in is invite-only, because an open passwordless form on a product with no billing is a spam magnet rather than a growth feature.</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="keywords">
+    <h3>Skills keyword summary</h3>
+    <p>
+      TypeScript · JavaScript · React · Next.js · App Router · TSX · Node.js · Node 22 ·
+      PostgreSQL · SQL · Drizzle ORM · Neon · Schema design · Database transactions ·
+      Multi-tenant architecture · Tenant isolation · Passwordless authentication · Magic links ·
+      Session management · Domain-driven design · Pure functions · Deterministic scoring ·
+      Integer arithmetic · Unit testing · node:test · Test-first development · Validation ·
+      pnpm · pnpm workspaces · Turborepo · Monorepo · Design systems · Design tokens ·
+      Theme generation · Colour maths · Light and dark themes · CSS · HTML5 · SVG ·
+      Accessibility · Git · GitHub · GitHub Pages · CI/CD · Kanban · WIP limits ·
+      Portfolio management · Readiness assessment · Full-stack development · SaaS
+    </p>
+  </section>
+
+  <footer>Shipshape · Readiness rubrics and boards across a portfolio · Sole engineer · Northbound Software Studio</footer>
+
+</div>
