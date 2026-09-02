@@ -7,6 +7,11 @@
   /* Chart & Rule — the product's own palette. Hairline rules do the
      structural work, and the readiness bands are the only other colour. */
   :root {
+    --c1: #2b6559;
+    --c2: #a83f2a;
+    --c3: #7d5410;
+    --c4: #2b627f;
+    --c5: #5f5280;
     --ground:     #f6f4ef;
     --card:       #fffdf9;
     --sunk:       #eceae3;
@@ -32,6 +37,11 @@
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
+    --c1: #64bda9;
+    --c2: #e8836a;
+    --c3: #d6a44a;
+    --c4: #6aacd0;
+    --c5: #a294c9;
       --ground:     #0f1614;
       --card:       #17201d;
       --sunk:       #131a18;
@@ -53,6 +63,11 @@
   }
 
   :root[data-theme="dark"] {
+    --c1: #64bda9;
+    --c2: #e8836a;
+    --c3: #d6a44a;
+    --c4: #6aacd0;
+    --c5: #a294c9;
     --ground:     #0f1614;
     --card:       #17201d;
     --sunk:       #131a18;
@@ -231,7 +246,7 @@
     margin: 0;
     overflow-x: auto;
   }
-  .diagram svg { display: block; margin: 0 auto; min-width: 34rem; max-width: 100%; height: auto; }
+  .diagram svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
   .diagram figcaption {
     margin-top: 1rem;
     font-size: 0.9375rem;
@@ -345,12 +360,69 @@
     .linkrow { grid-template-columns: 1fr; }
     .band { grid-template-columns: 0.4rem 1fr; }
   }
+
+  /* ---- Colour system -------------------------------------------------- */
+  /* Each card in a run takes the next hue, so a category is legible by
+     colour before it is read. Every hue is defined in both themes. */
+
+  .chips .chip { background: color-mix(in srgb, var(--c) 13%, var(--card)); color: var(--c); border: 1px solid color-mix(in srgb, var(--c) 34%, transparent); }
+  .chips .chip:nth-child(5n+1) { --c: var(--c1); }
+  .chips .chip:nth-child(5n+2) { --c: var(--c2); }
+  .chips .chip:nth-child(5n+3) { --c: var(--c3); }
+  .chips .chip:nth-child(5n+4) { --c: var(--c4); }
+  .chips .chip:nth-child(5n+5) { --c: var(--c5); }
+
+  .steps .step { border-top: 3px solid var(--c); }
+  .steps .step h3 { color: var(--c); }
+  .steps .step:nth-child(3n+1) { --c: var(--c1); }
+  .steps .step:nth-child(3n+2) { --c: var(--c2); }
+  .steps .step:nth-child(3n+3) { --c: var(--c3); }
+
+  .stack .group { border-top: 3px solid var(--c); }
+  .stack .group h3 { color: var(--c); }
+  .stack .group li.hi { background: color-mix(in srgb, var(--c) 14%, var(--card)); border-color: var(--c); color: var(--c); }
+  .stack .group:nth-child(5n+1) { --c: var(--c1); }
+  .stack .group:nth-child(5n+2) { --c: var(--c2); }
+  .stack .group:nth-child(5n+3) { --c: var(--c3); }
+  .stack .group:nth-child(5n+4) { --c: var(--c4); }
+  .stack .group:nth-child(5n+5) { --c: var(--c5); }
+
+  .stats .stat { border-top-color: var(--c); }
+  .stats .stat b { color: var(--c); }
+  .stats .stat:nth-child(5n+1) { --c: var(--c1); }
+  .stats .stat:nth-child(5n+2) { --c: var(--c2); }
+  .stats .stat:nth-child(5n+3) { --c: var(--c3); }
+  .stats .stat:nth-child(5n+4) { --c: var(--c4); }
+  .stats .stat:nth-child(5n+5) { --c: var(--c5); }
+
+  .did li { border-left: 3px solid var(--c); }
+  .did li .tick { color: var(--c); }
+  .did li:nth-child(5n+1) { --c: var(--c1); }
+  .did li:nth-child(5n+2) { --c: var(--c2); }
+  .did li:nth-child(5n+3) { --c: var(--c3); }
+  .did li:nth-child(5n+4) { --c: var(--c4); }
+  .did li:nth-child(5n+5) { --c: var(--c5); }
+
+  /* ---- Role line ------------------------------------------------------- */
+  .role {
+    font-family: var(--f-mono);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--ink-faint);
+    letter-spacing: 0.01em;
+    margin: 0;
+    max-width: none;
+  }
+
+  /* Diagrams scale down instead of forcing the page sideways. */
+  .diagram svg { min-width: 0; }
 </style>
 
 <div class="page">
 
   <header class="hero">
     <h1>Shipshape</h1>
+    <p class="role">Full-Stack Software Engineer · TypeScript · Next.js · PostgreSQL · Domain-driven design</p>
     <p class="tagline">
       Most project tools track <b>what you are doing</b>. Shipshape also tracks
       <b>what "done" is supposed to mean</b> — written once, applied to every project you own — and
@@ -485,7 +557,8 @@
         <rect x="372" y="72" width="140" height="70" rx="2" fill="var(--card)" stroke="var(--ink-faint)" stroke-width="1.8"/>
         <text x="442" y="96" text-anchor="middle" font-family="Fraunces, serif" font-size="13" font-weight="600" fill="var(--ink)">One verdict</text>
         <text x="442" y="112" text-anchor="middle" font-family="Fraunces, serif" font-size="13" font-weight="600" fill="var(--ink)">per criterion</text>
-        <text x="442" y="130" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-faint)">met · partial · not met · waived</text>
+        <text x="442" y="126" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-faint)">met · partial</text>
+        <text x="442" y="138" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-faint)">not met · waived</text>
 
         <!-- score -->
         <line x1="516" y1="94" x2="552" y2="72" stroke="var(--ink-faint)" stroke-width="1.8" marker-end="url(#ss-arrow)"/>
@@ -566,7 +639,7 @@
         <line x1="324" y1="203" x2="352" y2="196" stroke="var(--ink-faint)" stroke-width="1.6" marker-end="url(#ss-erd)"/>
         <rect x="352" y="180" width="150" height="46" rx="2" fill="var(--card)" stroke="var(--ink-faint)" stroke-width="1.6"/>
         <text x="427" y="201" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="500" fill="var(--ink)">project_rubrics</text>
-        <text x="427" y="217" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="10" fill="var(--ink-faint)">this standard, on this project</text>
+        <text x="427" y="217" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="9.5" fill="var(--ink-faint)">this standard, on this project</text>
 
         <line x1="427" y1="230" x2="427" y2="252" stroke="var(--ink-faint)" stroke-width="1.6" marker-end="url(#ss-erd)"/>
         <rect x="352" y="256" width="150" height="46" rx="2" fill="var(--card)" stroke="var(--ink-faint)" stroke-width="1.6"/>
@@ -650,7 +723,7 @@
   </section>
 
   <section>
-    <h2>Technologies</h2>
+    <h2>Technical Skills</h2>
     <div class="stack">
 
       <div class="group">
@@ -716,7 +789,7 @@
   </section>
 
   <section>
-    <h2>What I built</h2>
+    <h2>Key Achievements</h2>
     <ul class="did">
       <li>
         <svg class="tick" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9.5 L7 13.5 L15 4.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -742,7 +815,7 @@
   </section>
 
   <section class="keywords">
-    <h3>Skills keyword summary</h3>
+    <h3>Skills &amp; Keywords</h3>
     <p>
       TypeScript · JavaScript · React · Next.js · App Router · TSX · Node.js · Node 22 ·
       PostgreSQL · SQL · Drizzle ORM · Neon · Schema design · Database transactions ·
